@@ -15,6 +15,7 @@
         "laravel/framework": "5.7.*",
         "laravel/tinker": "^1.0",
         "mpociot/reanimate": "^1.0",
+        "spatie/laravel-activitylog": "^3.1",
         "spatie/laravel-blade-x": "2.0.0",
         "spatie/laravel-permission": "^2.29",
         "watson/active": "^3.0"
