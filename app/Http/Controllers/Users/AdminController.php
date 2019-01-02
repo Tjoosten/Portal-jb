@@ -86,7 +86,7 @@ class AdminController extends Controller
      */
     public function show(User $user): View 
     {
-        return view('users.show', compact('users'));
+        return view('users.show', compact('user'));
     }
 
     /**
@@ -100,6 +100,7 @@ class AdminController extends Controller
     public function undoDeleteRoute(int $admin): RedirectResponse 
     {
         $user = User::onlyTrashed()->findOrFail($admin);
+        $user->logActivity("Heeft de verwijdering van {$user->name} geannuleerd in de applicatie.", 'Admins & Leiding');
 
         $this->flashMessage->info("De verwijdering van {$user->name} is ongedaan gemaakt in de applicatie.");
         return $this->restoreModel($user->id, new User(), 'admins.index');

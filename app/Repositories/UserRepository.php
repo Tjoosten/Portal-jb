@@ -27,6 +27,8 @@ class UserRepository extends Authenticatable
         $flashMessage = new FlashRepository; 
 
         if ($this->validateRequest($request->confirmation) && $this->delete()) {
+            $this->logActivity("Heeft de gebruikers ({$this->name}) verwijderd in de applicatie.", 'Admins & Leiding');
+
             // Confirmation is valid && User has been deleted in the system.
             $undoLink = '<a href="'. route('admins.delete.undo', $this) .'" class="ml-2 no-underline">Undo</a>';
 

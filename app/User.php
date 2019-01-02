@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Traits\ActivityLog;
 use App\Repositories\UserRepository;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Notifications\Notifiable;
@@ -17,7 +18,7 @@ use Illuminate\Support\Facades\Cache;
  */
 class User extends UserRepository
 {
-    use Notifiable, HasRoles, SoftDeletes;
+    use Notifiable, HasRoles, SoftDeletes, ActivityLog;
 
     /**
      * The attributes that are mass assignable.

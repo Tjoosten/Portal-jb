@@ -29,6 +29,9 @@ Route::get('/lokalen/nieuw', 'Lokalen\IndexController@create')->name('lokalen.cr
 Route::post('/lokalen/nieuw', 'Lokalen\IndexController@store')->name('lokalen.store');
 Route::match(['get', 'delete'], '/lokalen/verwijder/{lokaal}', 'Lokalen\IndexController@destroy')->name('lokalen.delete');
 
+// Activity log routes 
+Route::get('logs/{user}', 'Users\ActivityController@show')->name('activity.user');
+
 // Administrator routes
 Route::get('admins', 'Users\AdminController@index')->name('admins.index');
 Route::match(['get', 'delete'], 'admins/delete/{admin}', 'Users\AdminController@destroy')->name('admins.destroy');
