@@ -4,6 +4,11 @@ namespace App\Observers;
 
 use App\Models\Werkpunten;
 
+/**
+ * Class WerkpuntObserver 
+ * 
+ * @package App\Observers
+ */
 class WerkpuntObserver
 {
     /**
