@@ -81,7 +81,7 @@ class AdminController extends Controller
     /**
      * Methode voor het weergaven van de gebruiker in de applicatie. 
      * 
-     * @param  User $user De databank entiteit van de gegeven gebruiker.sss
+     * @param  User $user De databank entiteit van de gegeven gebruiker.
      * @return View 
      */
     public function show(User $user): View 
