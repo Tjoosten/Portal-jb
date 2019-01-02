@@ -54,3 +54,15 @@ flex-direction: column;
   background-color: $sgv-green !important;
   border-color: darken($sgv-green, 5%);
 }
+
+.alert-icon {
+  padding-left: 3rem;
+
+  >i {
+    color: inherit !important;
+    font-size: 1rem;
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+  }
+}

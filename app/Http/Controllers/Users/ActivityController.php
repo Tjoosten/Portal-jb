@@ -34,7 +34,7 @@ class ActivityController extends Controller
      */
     public function show(User $user): View
     {
-        $logs = Activity::causedBy($user)->simplePaginate();
+        $logs = Activity::causedBy($user)->latest()->simplePaginate(10);
         $title = "Gelogde activiteiten voor {$user->name}";
 
         return view('users.activity', compact('user', 'logs', 'title'));

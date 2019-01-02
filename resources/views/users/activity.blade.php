@@ -25,22 +25,31 @@
             <div class="card card-body shadow-sm py-3 mb-3">
                 <h6 class="border-bottom border-gray pb-1 mb-3">{{ $title }}</h6>
 
-                <div class="table-responsive">
-                    <table class="table table-sm table-hover mb-0">
-                        <thead>
-                            <tr>
-                                <th scope="col" class="border-top-0">Categorie</th>
-                                <th scope="col" class="border-top-0">Bericht</th>
-                                <th scope="col" class="border-top-0">Datum</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @forelse ($logs as $log)
-                            @empty
-                            @endforelse
-                        </tbody>
-                    </table>
-                </div>
+                @if ($logs->count() > 0)
+                    <div class="table-responsive">
+                        <table class="table table-sm table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="border-top-0">Bericht</th>
+                                    <th scope="col" class="border-top-0">Datum</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($logs as $log) {{-- Loop door de geregistereerde gebruikers handelingen --}}
+                                    <tr>
+                                        <td>{{ $log->description }}</td>
+                                        <td>{{ $log->created_at }}</td>
+                                    </tr>
+                                @endforeach {{-- Sluit de loop af voor de logs --}}
+                            </tbody>
+                        </table>
+                    </div>
+                @else {{-- User has no logs --}}
+                    <div class="alert alert-icon alert-info" role="alert">
+                        <i class="fe fe-info mr-2" aria-hidden="true"></i>
+                        {{ $user->name }} heeft nog geen acties ondernomen in de applicatie.
+                    </div>
+                @endif
 
                 {{ $logs->render() }} {{-- Pagination view instance --}}
             </div>
