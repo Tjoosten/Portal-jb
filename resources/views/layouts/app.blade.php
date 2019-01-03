@@ -94,6 +94,12 @@
                             <i class="fe mr-1 fe-alert-triangle"></i> Werkpunten
                         </a>
                     @endif 
+
+                    @if (Auth::user()->can('view-huurder-dashboard', \App\Models\Helpdesk::class))
+                        <a href="{{ route('helpdesk.index.huurder') }}" class="nav-link {{ active('helpdesk.index.huurder') }}">
+                            <i class="fe mr-1 fe-help-circle"></i> Helpdesk
+                        </a>                    
+                    @endif 
                 </nav>
             </div>
 
@@ -109,7 +115,7 @@
 
                     <div class="float-right">
                         @if (Auth::user()->hasRole('huurder'))
-                            <a href="" class="link-footer">
+                            <a href="" class="link-footer mr-2">
                                 Gebruikersvoorwaarden
                             </a>
                         @endif

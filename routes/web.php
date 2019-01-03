@@ -32,6 +32,9 @@ Route::match(['get', 'delete'], '/lokalen/verwijder/{lokaal}', 'Lokalen\IndexCon
 // Activity log routes 
 Route::get('logs/{user}', 'Users\ActivityController@show')->name('activity.user');
 
+// Helpdesk routes
+Route::get('helpdesk/huurder', 'Helpdesk\DashboardController@huurder')->name('helpdesk.index.huurder');
+
 // Administrator routes
 Route::get('admins', 'Users\AdminController@index')->name('admins.index');
 Route::match(['get', 'delete'], 'admins/delete/{admin}', 'Users\AdminController@destroy')->name('admins.destroy');
