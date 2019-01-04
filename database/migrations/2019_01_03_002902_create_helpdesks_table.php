@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+/**
+ * Class CreateHelpdesksTable
+ */
 class CreateHelpdesksTable extends Migration
 {
     /**
@@ -11,11 +14,15 @@ class CreateHelpdesksTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('helpdesks', function (Blueprint $table) {
+        Schema::create('helpdesks', function (Blueprint $table): void {
             $table->increments('id');
+            $table->unsignedInteger('created_by')->nullable();
             $table->timestamps();
+
+            // Foreign key constraints
+            $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -24,7 +31,7 @@ class CreateHelpdesksTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('helpdesks');
     }

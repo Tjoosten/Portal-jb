@@ -2,11 +2,12 @@
 
 namespace App;
 
+use App\Models\Helpdesk;
 use App\Traits\ActivityLog;
 use App\Repositories\UserRepository;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Cache;
@@ -60,6 +61,16 @@ class User extends UserRepository
     public function setPasswordAttribute(string $password): void 
     {
         $this->attributes['password'] = bcrypt($password);
+    }
+
+    /**
+     * Data relatie voor alle helpdesk tickets dat zijn aangemaakt door de gegeven gebruiker.
+     *
+     * @return HasMany
+     */
+    public function questions(): HasMany
+    {
+        return $this->hasMany(Helpdesk::class, 'created_by');
     }
 
     /**

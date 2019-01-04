@@ -34,6 +34,7 @@ Route::get('logs/{user}', 'Users\ActivityController@show')->name('activity.user'
 
 // Helpdesk routes
 Route::get('helpdesk/huurder', 'Helpdesk\DashboardController@huurder')->name('helpdesk.index.huurder');
+Route::get('helpdesk/mijn-vragen', 'Helpdesk\TenantController@index')->name('helpdesk.overview.user');
 
 // Administrator routes
 Route::get('admins', 'Users\AdminController@index')->name('admins.index');

@@ -26,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
 
         // Blade registrations
         BladeX::component('components.*');
+        BladeX::component('helpdesk.components.*');
     }
 
     /**
