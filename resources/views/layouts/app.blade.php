@@ -40,7 +40,7 @@
                                 <a href="" class="nav-link">
                                     <i class="fe fe-bell"></i>
 
-                                    <span style="margin-top: -.25rem;" class="badge align-middle badge-pill badge-notifications">
+                                    <span style="margin-top: -.25rem;" class="badge ml-1 align-middle badge-pill badge-notifications">
                                         {{ Auth::user()->unreadNotifications->count() }}
                                     </span>
                                 </a>
