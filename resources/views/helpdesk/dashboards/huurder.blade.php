@@ -40,16 +40,34 @@
                     <h6 class="border-bottom border-gray pb-1 mb-3">Ik heb een vraag of opmerking!</h6>
 
                     <div class="form-row">
-                        <div class="col-8">
-                            <input @input('titel') type="text" class="form-control @error('title', 'is-invalid')"id="inputTitel" placeholder="Titel *">
+                        <div class="form-group col-8">
+                            <label for="inputTitel">Titel <span class="text-danger">*</span></label>
+                            <input @input('titel') type="text" class="form-control @error('title', 'is-invalid')" id="inputTitel" placeholder="Titel *">
                             @error('titel')
                         </div>
-                        <div class="col-4">
-                            <select @input('category') class="form-control @error('category', 'is-invalid')">
+
+                        <div class="form-group col-4">
+                            <label for="selectCategorie">Categorie <span class="text-danger">*</span></label>                        
+                            <select @input('category') id="selectCategorie" class="form-control @error('category', 'is-invalid')">
                                 @options($categories, 'category')
                             </select>
 
                             @error('category') {{-- Validation error view partial --}}
+                        </div>
+
+                        <div class="form-group col-12">
+                            <label for="inputBeschrijving">Beschrijving <span class="text-danger">*</span></label>
+                            <textarea rows="5" class="form-control @error('beschrijving', 'is-invalid')" id="inputBeschrijving" placeholder="Beschrijf je vraag/opemerking">{{ old('beschrijving') }}</textarea>
+                            @error('beschrijving') {{-- validation error partial --}}
+                        </div>
+                    </div>
+
+                    <hr class="mt-0">
+
+                    <div class="form-row">
+                        <div class="form-group mb-0 col-6">
+                            <button type="submit" class="btn btn-success">Opslaan</button>
+                            <button type="reset" class="btn btn-light">Reset</button>
                         </div>
                     </div>
                 </form>
