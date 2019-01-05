@@ -19,6 +19,9 @@ class CreateHelpdesksTable extends Migration
         Schema::create('helpdesks', function (Blueprint $table): void {
             $table->increments('id');
             $table->unsignedInteger('created_by')->nullable();
+            $table->string('titel'); 
+            $table->string('categorie'); 
+            $table->text('beschrijving');
             $table->timestamps();
 
             // Foreign key constraints

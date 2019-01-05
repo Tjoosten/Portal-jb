@@ -35,21 +35,21 @@
                     </div> {{-- End info notice --}}
                 @endif
 
-                <form method="POST" action="" class="card card-body mb-3 py-3 shadow-sm">
+                <form method="POST" action="{{ route('helpdesk.ticket.store') }}" class="card card-body mb-3 py-3 shadow-sm">
                     @csrf {{-- Form field protection --}}
                     <h6 class="border-bottom border-gray pb-1 mb-3">Ik heb een vraag of opmerking!</h6>
 
                     <div class="form-row">
                         <div class="form-group col-8">
                             <label for="inputTitel">Titel <span class="text-danger">*</span></label>
-                            <input @input('titel') type="text" class="form-control @error('title', 'is-invalid')" id="inputTitel" placeholder="Titel *">
+                            <input @input('titel') type="text" class="form-control @error('titel', 'is-invalid')" id="inputTitel" placeholder="Titel *">
                             @error('titel')
                         </div>
 
                         <div class="form-group col-4">
                             <label for="selectCategorie">Categorie <span class="text-danger">*</span></label>                        
-                            <select @input('category') id="selectCategorie" class="form-control @error('category', 'is-invalid')">
-                                @options($categories, 'category')
+                            <select @input('categorie') id="selectCategorie" class="form-control @error('category', 'is-invalid')">
+                                @options($categories, 'categorie')
                             </select>
 
                             @error('category') {{-- Validation error view partial --}}
@@ -57,7 +57,7 @@
 
                         <div class="form-group col-12">
                             <label for="inputBeschrijving">Beschrijving <span class="text-danger">*</span></label>
-                            <textarea rows="5" class="form-control @error('beschrijving', 'is-invalid')" id="inputBeschrijving" placeholder="Beschrijf je vraag/opemerking">{{ old('beschrijving') }}</textarea>
+                            <textarea rows="5" @input('beschrijving') class="form-control @error('beschrijving', 'is-invalid')" id="inputBeschrijving" placeholder="Beschrijf je vraag/opmerking">{{ old('beschrijving') }}</textarea>
                             @error('beschrijving') {{-- validation error partial --}}
                         </div>
                     </div>

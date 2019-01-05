@@ -16,6 +16,17 @@ class HelpdeskPolicy
     use HandlesAuthorization;
 
     /**
+     * Determine wheter the authenticated user can create an helpdesk ticket or not. 
+     * 
+     * @param  User $user The database entity from the authenticated user. 
+     * @return bool
+     */
+    public function store(User $user): bool 
+    {
+        return $user->hasAnyRole(['admin', 'huurder']);
+    }
+
+    /**
      * Determine whether the user can create helpdesks.
      *
      * @param  User  $user Databank instantie van de aangemelde gebruiker. 
