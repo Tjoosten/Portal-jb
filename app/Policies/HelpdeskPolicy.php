@@ -16,7 +16,19 @@ class HelpdeskPolicy
     use HandlesAuthorization;
 
     /**
-     * Determine wheter the authenticated user can create an helpdesk ticket or not. 
+     * Determine whether the user can view the helpdesk ticket or not. 
+     *
+     * @param  User     $user   De databank entity van de aangemelde gebruiker. 
+     * @param  Helpdesk $ticket De databank entity van het helpdesk ticket.  
+     * @return bool
+     */
+    public function viewTicket(User $user, Helpdesk $ticket): bool 
+    {
+        return $user->id === $ticket->created_by || $user->hasRole('admin');
+    }
+
+    /**
+     * Determine whether the authenticated user can create an helpdesk ticket or not. 
      * 
      * @param  User $user The database entity from the authenticated user. 
      * @return bool

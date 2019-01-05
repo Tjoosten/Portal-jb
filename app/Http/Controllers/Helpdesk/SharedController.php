@@ -51,4 +51,18 @@ class SharedController extends Controller
 
         return redirect()->route('helpdesk.ticket.show', $ticket);
     } 
+
+    /**
+     * Methode voor de weergave van een ticket. 
+     * 
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * 
+     * @param  Helpdesk $ticket De databank entity van een helpdesk ticket. 
+     * @return View 
+     */
+    public function show(Helpdesk $ticket): View 
+    {
+        $this->authorize('view-ticket', $ticket);
+        return view('helpdesk.tickets.show', compact('ticket'));
+    }
 }
