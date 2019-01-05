@@ -6,6 +6,7 @@ use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Helpdesk\CreateValidator;
 use App\Models\Helpdesk;
+use Illuminate\View\View;
 
 /**
  * Class SharedController 
@@ -32,8 +33,6 @@ class SharedController extends Controller
      * Methode voor het opslaan van een ticket in de helpdesk. 
      * --- 
      * Authorizatie van de request gebeurd in de form request class 
-     *  
-     * @see \App\Observers\HelpdeskObserver::class Voor de registratie van de data relaties. 
      * 
      * @param  CreateValidator $input De form request class dat verantwoordelijk is voor de validatie
      * @return RedirectResponse
@@ -63,6 +62,6 @@ class SharedController extends Controller
     public function show(Helpdesk $ticket): View 
     {
         $this->authorize('view-ticket', $ticket);
-        return view('helpdesk.tickets.show', compact('ticket'));
+        return view('helpdesk.shared.show', compact('ticket'));
     }
 }

@@ -96,7 +96,7 @@
                     @endif 
 
                     @if (Auth::user()->can('view-huurder-dashboard', \App\Models\Helpdesk::class))
-                        <a href="{{ route('helpdesk.index.huurder') }}" class="nav-link {{ active('helpdesk.index.huurder') }}">
+                        <a href="{{ route('helpdesk.index.huurder') }}" class="nav-link {{ active('helpdesk.*') }}">
                             <i class="fe mr-1 fe-help-circle"></i> Helpdesk
                         </a>                    
                     @endif 

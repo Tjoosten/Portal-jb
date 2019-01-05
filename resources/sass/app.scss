@@ -50,6 +50,12 @@ flex-direction: column;
   white-space: nowrap;
 }
 
+.btn-ticket-option {
+  @include button-variant($gray-400, $gray-400);
+  white-space: nowrap;
+  color: darken($gray-400, 40%);
+}
+
 .list-group-item.active {
   background-color: $sgv-green !important;
   border-color: darken($sgv-green, 5%);

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\ActivityLog;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\User;
 
 /**
  * Class Helpdesk 
@@ -21,4 +22,10 @@ class Helpdesk extends Model
      * @var array 
      */
     protected $fillable = ['titel', 'categorie', 'beschrijving'];
+
+    public function creator(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'created_by')
+            ->withDefault(['name' => 'Onbekende gebruiker']);
+    }
 }
