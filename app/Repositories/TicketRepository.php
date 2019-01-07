@@ -18,7 +18,7 @@ class TicketRepository extends Model
      */
     public function close(): void 
     {
-        if (auth()->user()->hasAnyRole(['leiding', 'huurder'])) {
+        if (auth()->user()->hasAnyRole(['leiding', 'admin'])) {
            $this->logActivity("Heeft een helpdesk ticket gesloten (#{$this->id})", 'Helpdesk'); 
         }
 
@@ -33,7 +33,7 @@ class TicketRepository extends Model
      */
     public function reopen(): void 
     {
-        if (auth()->user()->hasAnyRole(['leiding', 'huurder'])) {
+        if (auth()->user()->hasAnyRole(['leiding', 'admin'])) {
             $this->logActivity("Heeft een helpdesk ticket heropend (#{$this->id})", 'Helpdesk'); 
         }
 
