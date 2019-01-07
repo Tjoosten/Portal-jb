@@ -14,7 +14,7 @@
                             <i class="fe mr-1 fe-edit"></i> Wijzig
                         </a>
                     @elseif (Auth::user()->can('assign-ticket', $ticket))
-                        <a href="" class="btn shadow-sm btn-ticket-option">
+                        <a href="{{ route('helpdesk.ticket.assign', $ticket) }}" class="btn shadow-sm btn-ticket-option">
                             <i class="fe fe-check"></i> Opvolgen
                         </a>
                     @endif

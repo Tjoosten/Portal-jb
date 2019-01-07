@@ -37,14 +37,14 @@ class Helpdesk extends TicketRepository
      */
     public function assignee(): BelongsTo
     {
-        return $this->belongsTo(User::class)
+        return $this->belongsTo(User::class, 'assigned')
             ->withDefault(['name' => '<span class="text-secondary">Niemand</span>']);
     }
 
     /**
      * De data relatie voor de informatie van de gebruiker die het ticket heeft gesloten. 
      * 
-     * @var BelongsTo
+     * @return BelongsTo
      */
     public function closer(): BelongsTo
     {
