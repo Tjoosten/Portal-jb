@@ -9,9 +9,16 @@
             <div class="page-options d-flex">
             <div class="btn-toolbar" role="toolbar" aria-label="Ticket opties">
                 <div class="btn-group mr-2" role="group" aria-label="Wijzig knop">
-                    <a href="" class="btn shadow-sm btn-ticket-option">
-                        <i class="fe mr-1 fe-edit"></i> Wijzig
-                    </a>
+                    @if (Auth::user()->can('edit', $ticket))
+                        <a href="" class="btn shadow-sm btn-ticket-option">
+                            <i class="fe mr-1 fe-edit"></i> Wijzig
+                        </a>
+                    @elseif (Auth::user()->can('assign-ticket', $ticket))
+                        <a href="" class="btn shadow-sm btn-ticket-option">
+                            <i class="fe fe-check"></i> Opvolgen
+                        </a>
+                    @endif
+
                     <a href="" role="group" aria-label="Sluit knop" class="btn shadow-sm btn-ticket-option">
                         <i class="fe mr-1 fe-x-circle"></i> Sluit ticket
                     </a>
@@ -21,7 +28,7 @@
                     <a href="" class="btn shadow-sm btn-ticket-option">
                         <i class="fe mr-1 fe-list"></i> Mijn vragen
                     </a>
-                    <a href="" class="btn shadow-sm btn-ticket-option">
+                    <a href="{{ route('helpdesk.index.huurder') }}" class="btn shadow-sm btn-ticket-option">
                         <i class="fe mr-1 fe-plus"></i> Nieuw ticket
                     </a>
                 </div>
@@ -31,13 +38,14 @@
     </div>
 
     <div class="row">
-        <div class="col-9">
+        <div class="col-8">
             <div class="card card-body mb-3 py-3 shadow-sm">
                 <h6 class="border-bottom border-gray pb-1 mb-3"> {{ ucfirst($ticket->titel) }}</h6>
+                {!! $ticket->beschrijving !!}
             </div>
         </div>
 
-        <div class="col-3">
+        <div class="col-4">
             <div class="card card-body mb-3 py-3 shadow-sm">
                 <h6 class="border-bottom border-gray pb-1 mb-2"> 
                     <span class="float-right">Ticket informatie</span> 
@@ -48,6 +56,30 @@
                         <tr>
                             <td class="float-left"><strong>Ticket ID</strong></td>
                             <td class="float-right"><code>#{{ $ticket->id }}</code></td>
+                        </tr>
+                        <tr>
+                            <td class="float-left"><strong>Status</strong></td>
+                            <td class="float-right">
+                                @if ($ticket->is_open)
+                                    <span class="text-success">Open</span>
+                                @else {{-- The ticket is open --}}
+                                    <span class="text-danger">Gesloten</span>
+                                @endif
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="float-left"><strong>Opvolging door:</strong></td>
+                            <td class="float-right">
+                                {!! $ticket->assignee->name !!}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="float-left"><strong>Type</strong></td>
+                            <td class="float-right">{{ $ticket->categorie }}</td>
+                        </tr>
+                        <tr>
+                            <td class="float-left"><strong>Creatie datum</strong></td>
+                            <td class="float-right">{{ $ticket->created_at->diffForHumans() }}</td>
                         </tr>
                     </thead>
                 </table>

@@ -19,6 +19,8 @@ class CreateHelpdesksTable extends Migration
         Schema::create('helpdesks', function (Blueprint $table): void {
             $table->increments('id');
             $table->unsignedInteger('created_by')->nullable();
+            $table->unsignedInteger('assigned')->nullable();
+            $table->boolean('is_open')->default(1); // True is the default boolean value.
             $table->string('titel'); 
             $table->string('categorie'); 
             $table->text('beschrijving');
@@ -26,6 +28,7 @@ class CreateHelpdesksTable extends Migration
 
             // Foreign key constraints
             $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('assigned')->references('id')->on('users')->onDelete('SET NULL');
         });
     }
 

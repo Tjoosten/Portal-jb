@@ -28,6 +28,30 @@ class HelpdeskPolicy
     }
 
     /**
+     * Determine wheter the authenticated user can assign himself to the ticket.
+     *
+     * @param  User     $user   De databank entiteit van de aangemelde gebruiker.
+     * @param  Helpdesk $ticket De databank entiteit van het helpdesk ticket.
+     * @return bool
+     */
+    public function assignTicket(User $user, Helpdesk $ticket): bool
+    {
+        return $user->hasRole('admin') && ! $ticket->assigned && $user->id !== $ticket->created_by;
+    }
+
+    /**
+     * Determine whether the user can edit the ticket or not.
+     *
+     * @param  User     $user   De databank entiteit van de aangemelde gebruiker.
+     * @param  Helpdesk $ticket De databank entiteit van het helpdesk ticket.
+     * @return bool
+     */
+    public function edit(User $user, Helpdesk $ticket): bool
+    {
+        return $user->id === $ticket->created_by;
+    }
+
+    /**
      * Determine whether the authenticated user can create an helpdesk ticket or not. 
      * 
      * @param  User $user The database entity from the authenticated user. 

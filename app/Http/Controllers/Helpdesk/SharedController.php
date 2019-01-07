@@ -49,7 +49,16 @@ class SharedController extends Controller
         }
 
         return redirect()->route('helpdesk.ticket.show', $ticket);
-    } 
+    }
+
+    /**
+     * @param Helpdesk $
+     * @return RedirectResponse
+     */
+    public function close(Helpdesk $ticket): RedirectResponse
+    {
+        // TODO: Implement controller logic.
+    }
 
     /**
      * Methode voor de weergave van een ticket. 
