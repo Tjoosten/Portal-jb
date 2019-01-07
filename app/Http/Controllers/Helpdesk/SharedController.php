@@ -52,12 +52,25 @@ class SharedController extends Controller
     }
 
     /**
-     * @param Helpdesk $
+     * Methode voor het sluiten van een helpdesk ticket in de applicatie. 
+     *
+     * @param  Helpdesk $ticket De database entiteit van het database ticket. 
+     * @param  string   $status De nieuwe status voor het gegeven status ticket. 
      * @return RedirectResponse
      */
-    public function close(Helpdesk $ticket): RedirectResponse
+    public function status(Helpdesk $ticket, string $status): RedirectResponse
     {
-        // TODO: Implement controller logic.
+        $this->authorize('close-ticket', $ticket);
+         
+        if ($status === 'sluiten' && $ticket->update(['is_open' => false, 'closed_at' => now()])) {
+            $ticket->close();
+        } 
+        
+        if ($status === 'heropen' && $ticket->update(['is_open' => true, 'closed_at' => null])) {
+            $ticket->reopen();
+        }
+
+        return redirect()->route('helpdesk.ticket.show', $ticket);
     }
 
     /**

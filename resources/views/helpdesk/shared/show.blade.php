@@ -19,9 +19,17 @@
                         </a>
                     @endif
 
-                    <a href="" role="group" aria-label="Sluit knop" class="btn shadow-sm btn-ticket-option">
-                        <i class="fe mr-1 fe-x-circle"></i> Sluit ticket
-                    </a>
+                    @if (Auth::user()->can('close-ticket', $ticket) && $ticket->is_open) 
+                        <a href="{{ route('helpdesk.ticket.status', ['ticket' => $ticket, 'status' => 'sluiten']) }}" role="group" aria-label="Sluit knop" class="btn shadow-sm btn-ticket-option">
+                            <i class="fe mr-1 fe-x-circle"></i> Sluiten
+                        </a> 
+                    @endif 
+
+                    @if (! $ticket->is_open && Auth::user()->can('close-ticket', $ticket))
+                        <a href="{{ route('helpdesk.ticket.status', ['ticket' => $ticket, 'status' => 'heropen']) }}" role="group" aria-label="Sluit knop" class="btn shadow-sm btn-ticket-option">
+                            <i class="fe mr-1 fe-rotate-ccw"></i> Heropen
+                        </a> 
+                    @endif
                 </div>
 
                 <div class="btn-group" role="group" aria-label="Wijzig knop">
@@ -40,7 +48,14 @@
     <div class="row">
         <div class="col-8">
             <div class="card card-body mb-3 py-3 shadow-sm">
-                <h6 class="border-bottom border-gray pb-1 mb-3"> {{ ucfirst($ticket->titel) }}</h6>
+                <h6 class="border-bottom border-gray pb-1 mb-2"> {{ ucfirst($ticket->titel) }}</h6>
+                
+                @if (! $ticket->is_open)
+                    <small class="mb-2 text-danger">
+                        {{ $ticket->closer->name }} heeft dit ticket gesloten op {{ $ticket->closed_at->format('d M, Y') }}
+                    </small>
+                @endif
+
                 {!! $ticket->beschrijving !!}
             </div>
         </div>

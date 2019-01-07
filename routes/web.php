@@ -37,6 +37,7 @@ Route::get('helpdesk/huurder', 'Helpdesk\DashboardController@huurder')->name('he
 Route::get('helpdesk/mijn-vragen', 'Helpdesk\TenantController@index')->name('helpdesk.overview.user');
 Route::post('helpdesk/ticket', 'Helpdesk\SharedController@store')->name('helpdesk.ticket.store');
 Route::get('helpdesk/ticket/{ticket}', 'Helpdesk\SharedController@show')->name('helpdesk.ticket.show');
+Route::get('helpdesk/ticket/{ticket}/{status}', 'Helpdesk\SharedController@status')->name('helpdesk.ticket.status');
 
 // Administrator routes
 Route::get('admins', 'Users\AdminController@index')->name('admins.index');

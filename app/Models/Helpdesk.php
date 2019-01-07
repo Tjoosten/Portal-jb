@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Repositories\TicketRepository;
 use App\Traits\ActivityLog;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\User;
@@ -12,7 +12,7 @@ use App\User;
  * 
  * @package App\Models
  */
-class Helpdesk extends Model
+class Helpdesk extends TicketRepository
 {
     use ActivityLog;
 
@@ -21,7 +21,14 @@ class Helpdesk extends Model
      * 
      * @var array 
      */
-    protected $fillable = ['titel', 'categorie', 'beschrijving'];
+    protected $fillable = ['titel', 'is_open', 'categorie', 'beschrijving', 'closed_at'];
+
+    /**
+     * The immutable date fields in the database table. 
+     * 
+     * @var array
+     */
+    protected $dates = ['created_at', 'updated_at', 'closed_at'];
 
     /**
      * Data relatie voor de informatie omtrent de opvolger van het ticket
@@ -35,12 +42,23 @@ class Helpdesk extends Model
     }
 
     /**
+     * De data relatie voor de informatie van de gebruiker die het ticket heeft gesloten. 
+     * 
+     * @var BelongsTo
+     */
+    public function closer(): BelongsTo
+    {
+        return $this->belongsTo(User::class)->withDefault('Een administrator');
+    }
+
+    /**
      * De relatie voor de gebruikers informatie omtrent wie het ticket heeft aangemaakt.
+     * 
      * @return BelongsTo
      */
     public function creator(): BelongsTo
     {
         return $this->belongsTo(User::class, 'created_by')
-            ->withDefault(['name' => 'Onbekende gebruiker']);
+        ->withDefault(['name' => 'Onbekende gebruiker']);
     }
 }

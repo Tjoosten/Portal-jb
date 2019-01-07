@@ -40,6 +40,18 @@ class HelpdeskPolicy
     }
 
     /**
+     * Determine wheter the authenticated user can close the ticket or not. 
+     * 
+     * @param  User     $user   De databank entiteit van de aangemelde gebruiker. 
+     * @param  Helpdesk $ticket De databank entity van het helpdesk tikcet.  
+     * @return bool 
+     */
+    public function closeTicket(User $user, Helpdesk $ticket): bool 
+    {
+        return $ticket->created_by === $user->id || $ticket->assigned === $user->id;
+    }
+
+    /**
      * Determine whether the user can edit the ticket or not.
      *
      * @param  User     $user   De databank entiteit van de aangemelde gebruiker.
