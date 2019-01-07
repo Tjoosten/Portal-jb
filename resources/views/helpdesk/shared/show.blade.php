@@ -47,7 +47,7 @@
 
     <div class="row">
         <div class="col-8">
-            <div class="card card-body mb-3 py-3 shadow-sm">
+            <div class="card card-body mb-2 py-3 shadow-sm">
                 <h6 class="border-bottom border-gray pb-1 mb-2"> {{ ucfirst($ticket->titel) }}</h6>
                 
                 @if (! $ticket->is_open)
@@ -58,6 +58,40 @@
 
                 {!! $ticket->beschrijving !!}
             </div>
+
+            <hr class="mt-2 mb-2">
+
+            <div class="card shadow-sm">
+                <div class="card-header py-2">
+                    Jan met de pet  replied seconds ago
+
+                    <a href="" class="float-right btn btn-xs btn-outline-danger ml-2">
+                        verwijder
+                    </a>
+                    <a href="" class="float-right btn btn-xs btn-outline-secondary">
+                        wijzig
+                    </a>
+                </div>
+                <div class="card-body py-2">
+                    <p class="card-text">Test comment</p>
+                </div>
+            </div>
+
+            <hr class="mt-2 mb-2">
+
+            <form action="" method="POST">
+                @csrf {{-- Form field protection --}}
+                <div class="form-group">
+                    <textarea rows="4" @input('comment') class="form-control @error('comment', 'is-invalid') shadow-sm" placeholder="Reageer op dit ticket">{{ old('comment') }}</textarea>
+                    @error('comment')
+                </div>
+
+                <div class="form-group">
+                    <button class="btn shadow-sm btn-success">
+                        <i class="fe fe-message-square"></i> Reageer
+                    </button>
+                </div>
+            </form>
         </div>
 
         <div class="col-4">
