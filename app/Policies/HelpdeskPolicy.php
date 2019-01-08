@@ -73,15 +73,4 @@ class HelpdeskPolicy
     {
         return $user->hasAnyRole(['admin', 'huurder']);
     }
-
-    /**
-     * Determine whether the user can create helpdesks.
-     *
-     * @param  User  $user Databank instantie van de aangemelde gebruiker. 
-     * @return bool
-     */
-    public function viewHuurderDashboard(User $user): bool
-    {
-        return $user->hasRole('huurder');
-    }
 }

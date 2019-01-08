@@ -3,6 +3,7 @@
 namespace App\Repositories; 
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 /**
  * Class TicketRepository 
@@ -39,5 +40,25 @@ class TicketRepository extends Model
 
         $this->closer()->dissociate()->save();
         flash("Het ticket met de id #{$this->id} is heropend.")->info();
+    }
+
+    /**
+     * Methode voor op ophalen van alle helpdeskTickets in de applicatie. 
+     * 
+     * @param  null|string $filter
+     * @return Builder
+     */
+    public function getTicketsByType(?string $filter): Builder
+    {
+        switch ($filter) { // Bepaling van welke tickets de gebruiker wilt weergeven. 
+            case 'gesloten':    return $this->whereIsOpen(false); 
+            case 'open':        return $this->whereIsOpen(true);
+            case 'toegewezen':  return $this->whereAssigned(auth()-user()->id); 
+            case 'vraag':       return $this->whereType('vraag'); 
+            case 'opmerkingen': return $this->whereType('opmerking');
+
+            // Geen valide filter is opgegeven dus return alle helpdesk tickets.
+            default: return $this->latest();
+        }
     }
 }

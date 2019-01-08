@@ -28,15 +28,23 @@ class DashboardController extends Controller
     /**
      * Methode voor het weergeven van de helpdesk index pagina. (huurder)
      *
-     * @throws \Illuminate\Auth\Access\AuthorizationException
-     *
+     * @param  Request  $request    Class voor the request data dat is gebonden aan de controller.
+     * @param  Helpdesk $ticket     Database model class voor de helpdesk tickets. 
      * @return View
      */
-    public function huurder(): View
+    public function huurder(Request $request, Helpdesk $tickets): View
     {
-        $this->authorize('view-huurder-dashboard', Helpdesk::class);
         $categories = ['Vraag' => 'Vraag', 'Opmerking' => 'Opmerking'];
 
+        if ($this->auth->user()->hasRole(['leiding', 'admin', 'webmaster'])) {
+            // Administrators, Leiding en de webmaster hebben toegang nodig tot het admin dashboard. 
+            // Dit panel heeft meer functies en opties. Alsook een oplijsting van de ticket in de applicatie. 
+
+            $tickets = $tickets->getTicketsByType($request->filter)->simplePaginate();
+            return view('helpdesk.dashboards.admin', compact('categories', 'tickets'));
+        }
+
+        // De gebruiker is een gewone huurder. Dus val terug op het standaard helpdesk dashboard. 
         return view('helpdesk.dashboards.huurder', compact('categories'));
     }
 }
