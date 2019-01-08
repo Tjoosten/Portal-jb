@@ -40,6 +40,9 @@ Route::get('helpdesk/ticket/{ticket}', 'Helpdesk\SharedController@show')->name('
 Route::get('helpdesk/ticket/assign/{ticket}', 'Helpdesk\AdminController@assign')->name('helpdesk.ticket.assign');
 Route::get('helpdesk/ticket/{ticket}/{status}', 'Helpdesk\SharedController@status')->name('helpdesk.ticket.status');
 
+// Helpdesk comment routes
+Route::post('helpdesk/{ticket}/reageer', 'Helpdesk\CommentController@store')->name('helpdesk.comment');
+
 // Administrator routes
 Route::get('admins', 'Users\AdminController@index')->name('admins.index');
 Route::match(['get', 'delete'], 'admins/delete/{admin}', 'Users\AdminController@destroy')->name('admins.destroy');

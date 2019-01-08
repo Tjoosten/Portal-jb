@@ -84,6 +84,8 @@ class SharedController extends Controller
     public function show(Helpdesk $ticket): View 
     {
         $this->authorize('view-ticket', $ticket);
-        return view('helpdesk.shared.show', compact('ticket'));
+        $comments = $ticket->comments()->latest()->take(4)->get();
+
+        return view('helpdesk.shared.show', compact('ticket', 'comments'));
     }
 }

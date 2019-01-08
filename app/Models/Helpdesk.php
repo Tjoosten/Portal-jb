@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Repositories\TicketRepository;
 use App\Traits\ActivityLog;
+use BeyondCode\Comments\Traits\HasComments;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\User;
 
@@ -14,7 +15,7 @@ use App\User;
  */
 class Helpdesk extends TicketRepository
 {
-    use ActivityLog;
+    use ActivityLog, HasComments;
 
     /**
      * Mass-assignable fields from the database table. 

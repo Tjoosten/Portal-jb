@@ -59,27 +59,17 @@
                 {!! $ticket->beschrijving !!}
             </div>
 
-            <hr class="mt-2 mb-2">
+            @foreach ($comments as $comment)
+                @if ($loop->first)
+                    <hr class="mt-2 mb-2">
+                @endif
 
-            <div class="card shadow-sm">
-                <div class="card-header py-2">
-                    Jan met de pet  replied seconds ago
-
-                    <a href="" class="float-right btn btn-xs btn-outline-danger ml-2">
-                        verwijder
-                    </a>
-                    <a href="" class="float-right btn btn-xs btn-outline-secondary">
-                        wijzig
-                    </a>
-                </div>
-                <div class="card-body py-2">
-                    <p class="card-text">Test comment</p>
-                </div>
-            </div>
+                <helpdesk-comment :comment="$comment" :loop="$loop"></helpdesk-comment>
+            @endforeach
 
             <hr class="mt-2 mb-2">
 
-            <form action="" method="POST">
+            <form action="{{ route('helpdesk.comment', $ticket) }}" method="POST">
                 @csrf {{-- Form field protection --}}
                 <div class="form-group">
                     <textarea rows="4" @input('comment') class="form-control @error('comment', 'is-invalid') shadow-sm" placeholder="Reageer op dit ticket">{{ old('comment') }}</textarea>
