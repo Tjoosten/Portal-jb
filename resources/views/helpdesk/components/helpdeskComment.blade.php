@@ -3,7 +3,7 @@
         {{ $comment->commentator->name }}
 
         @if (Auth::user()->can('destroy', $comment))
-            <a href="" class="float-right btn btn-xs btn-outline-danger ml-2">
+            <a href="{{ route('helpdesk.comment.delete', $comment) }}" class="float-right btn btn-xs btn-outline-danger ml-2">
                 verwijder
             </a>
         @endif

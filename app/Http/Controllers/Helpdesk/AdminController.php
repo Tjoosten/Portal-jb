@@ -31,7 +31,6 @@ class AdminController extends Controller
     /**
      * Methode om de aangemelde leider, leidster of administrator toe te wijzen aan het ticket. 
      * 
-     * @todo Register and implement route 
      * @todo Implementatie notitie voor de creator voor het ticket. 
      * 
      * @param  Helpdesk $ticket De databan entiteit van het helpdesk ticket.

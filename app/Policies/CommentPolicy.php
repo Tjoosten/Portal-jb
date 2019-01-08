@@ -24,7 +24,7 @@ class CommentPolicy
      */
     public function edit(User $user, Comment $comment): bool 
     {
-        return $user->id === $comment->commentable->id;
+        return $user->id === $comment->user_id;
     }
 
     /**
@@ -36,6 +36,6 @@ class CommentPolicy
      */
     public function destroy(User $user, Comment $comment): bool 
     {
-        return $user->id === $comment->commentable->id;
+        return $user->id === $comment->user_id;
     }
 }

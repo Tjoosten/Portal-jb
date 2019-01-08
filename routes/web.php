@@ -42,6 +42,7 @@ Route::get('helpdesk/ticket/{ticket}/{status}', 'Helpdesk\SharedController@statu
 
 // Helpdesk comment routes
 Route::post('helpdesk/{ticket}/reageer', 'Helpdesk\CommentController@store')->name('helpdesk.comment');
+Route::get('helpdesk/comment/delete/{comment}', 'Helpdesk\CommentController@destroy')->name('helpdesk.comment.delete');
 
 // Administrator routes
 Route::get('admins', 'Users\AdminController@index')->name('admins.index');

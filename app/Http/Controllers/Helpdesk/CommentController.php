@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Helpdesk;
 use App\Models\Helpdesk;
 use Illuminate\Http\{Request, RedirectResponse};
 use App\Http\Controllers\Controller;
+use BeyondCode\Comments\Comment;
 
 /**
  * Class CommentController
@@ -39,5 +40,21 @@ class CommentController extends Controller
 
         $ticket->comment($request->comment);
         return redirect()->route('helpdesk.ticket.show', $ticket);
+    }
+
+    /**
+     * Methode voor het verwijderen van een comment in de applicatie. 
+     * 
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     *
+     * @param  Comment $comment De database instantie van de comment
+     * @return RedirectResponse 
+     */
+    public function destroy(Comment $comment): RedirectResponse 
+    {
+        $this->authorize('destroy', $comment);
+
+        $comment->delete(); // Delete operaration for the comment
+        return redirect()->route('helpdesk.ticket.show', $comment->commentable);
     }
 }
