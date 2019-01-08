@@ -2,18 +2,17 @@
     <div class="card-header py-2">
         {{ $comment->commentator->name }}
 
-        @if ()
+        @if (Auth::user()->can('destroy', $comment))
+            <a href="" class="float-right btn btn-xs btn-outline-danger ml-2">
+                verwijder
+            </a>
         @endif
 
-        @if ()
+        @if (Auth::user()->can('edit', $comment))
+            <a href="" class="float-right btn btn-xs btn-outline-secondary">
+                Wijzig
+            </a>
         @endif
-
-        <a href="" class="float-right btn btn-xs btn-outline-danger ml-2">
-            verwijder
-        </a>
-        <a href="" class="float-right btn btn-xs btn-outline-secondary">
-            wijzig
-        </a>
     </div>
     <div class="card-body py-2">
         <p class="card-text">{{ $comment->comment }}</p>
