@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Helpdesk;
 
+use Illuminate\Support\Facades\Route;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Helpdesk\CreateValidator;
@@ -68,6 +69,10 @@ class SharedController extends Controller
         
         if ($status === 'heropen' && $ticket->update(['is_open' => true, 'closed_at' => null])) {
             $ticket->reopen();
+        }
+
+        if (url()->previous() === url('helpdesk/mijn-vragen')) {
+            return redirect()->route('helpdesk.overview.user');
         }
 
         return redirect()->route('helpdesk.ticket.show', $ticket);

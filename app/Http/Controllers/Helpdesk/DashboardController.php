@@ -39,7 +39,6 @@ class DashboardController extends Controller
         if ($this->auth->user()->hasRole(['leiding', 'admin', 'webmaster'])) {
             // Administrators, Leiding en de webmaster hebben toegang nodig tot het admin dashboard. 
             // Dit panel heeft meer functies en opties. Alsook een oplijsting van de ticket in de applicatie. 
-
             $tickets = $tickets->getTicketsByType($request->filter)->simplePaginate();
             return view('helpdesk.dashboards.admin', compact('categories', 'tickets'));
         }

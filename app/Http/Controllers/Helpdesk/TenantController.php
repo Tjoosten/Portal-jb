@@ -35,7 +35,9 @@ class TenantController extends Controller
      */
     public function index(): View
     {
-        $questions = auth()->user()->questions()->simplePaginate();
-        return view('helpdesk.tenant.overview', compact($questions));
+        $user = $this->auth->user();
+        $tickets = $user->questions()->latest()->simplePaginate();
+
+        return view('helpdesk.tenant.overview', compact('tickets'));
     }
 }
