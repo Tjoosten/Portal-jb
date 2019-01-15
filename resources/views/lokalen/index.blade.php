@@ -83,7 +83,7 @@
                         </td>
                     @empty {{-- Er zijn geen lokalen gevonden in de applicatie --}}
                         <td colspan="6">
-                            <span class="font-italic tet-secondary">Er zijn geen lokalen geregistreerd in de applicatie</span>
+                            <span class="font-italic text-secondary">Er zijn geen lokalen geregistreerd in de applicatie</span>
                         </td>
                     @endforelse {{-- /// END loop voor de lokalen van de gebruiker. --}}
                 </tbody>
