@@ -29,7 +29,7 @@ Route::get('/lokalen/nieuw', 'Lokalen\IndexController@create')->name('lokalen.cr
 Route::post('/lokalen/nieuw', 'Lokalen\IndexController@store')->name('lokalen.store');
 Route::match(['get', 'delete'], '/lokalen/verwijder/{lokaal}', 'Lokalen\IndexController@destroy')->name('lokalen.delete');
 
-// Activity log routes 
+// Activity log routes
 Route::get('logs/{user}', 'Users\ActivityController@show')->name('activity.user');
 
 // Helpdesk routes
@@ -49,9 +49,10 @@ Route::get('admins', 'Users\AdminController@index')->name('admins.index');
 Route::match(['get', 'delete'], 'admins/delete/{admin}', 'Users\AdminController@destroy')->name('admins.destroy');
 Route::get('admins/delete/{admin}/undo', 'Users\AdminController@undoDeleteRoute')->name('admins.delete.undo');
 Route::get('admins/nieuw', 'Users\AdminController@create')->name('admins.create');
+Route::post('admins/nieuw', 'Users\AdminController@store')->name('admins.store');
 Route::get('admins/profile/{user}', 'Users\AdminController@show')->name('admins.show');
 
-// Account settings routes 
+// Account settings routes
 Route::get('/account-settings/{type?}', 'Users\SettingsController@index')->name('account.settings');
 Route::patch('/account-settings/security', 'Users\SettingsController@updateSecurity')->name('account.settings.security');
 Route::patch('/account-settings/information', 'Users\SettingsController@updateInformation')->name('account.settings.information');

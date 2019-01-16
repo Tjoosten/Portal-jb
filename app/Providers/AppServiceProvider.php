@@ -2,8 +2,9 @@
 
 namespace App\Providers;
 
+use App\User;
 use App\Models\Werkpunten;
-use App\Observers\WerkpuntObserver;
+use App\Observers\{WerkpuntObserver, UserObserver};
 use Spatie\BladeX\Facades\BladeX;
 use Illuminate\Support\ServiceProvider;
 
@@ -23,6 +24,7 @@ class AppServiceProvider extends ServiceProvider
     {
         // Model observers registration
         Werkpunten::observe(WerkpuntObserver::class);
+        User::observe(UserObserver::class);
 
         // Blade registrations
         BladeX::component('components.*');

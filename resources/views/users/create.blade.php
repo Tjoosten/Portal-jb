@@ -9,7 +9,7 @@
         </div>
     </div>
 
-    <form action="" method="POST" class="card col-md-12 card-body shadow-sm py-3 mb-3">
+    <form action="{{ route('admins.store') }}" method="POST" class="card col-md-12 card-body shadow-sm py-3 mb-3">
         <h6 class="border-bottom border-gray pb-1 mb-3">Gebruiker toevoegen.</h6>
         @csrf {{-- Form filed protection --}}
 
@@ -29,6 +29,7 @@
             <div class="form-group col-6">
                 <label for="inputTel">Tel. nummer van de gebruiker</label>
                 <input id="inputTel" type="text" class="form-control" placeholder="Telefoon nummer van de gebruiker" @input('telephone_number')>
+                @error('telephone_number')
             </div>
 
             <div class="form-group col-6">

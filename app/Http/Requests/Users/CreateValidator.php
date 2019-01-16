@@ -2,8 +2,15 @@
 
 namespace App\Http\Requests\Users;
 
+use Gate;
+use App\User;
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Class CreateValidator
+ *
+ * @package App\Http\Requests\Users
+ */
 class CreateValidator extends FormRequest
 {
     /**
@@ -11,9 +18,9 @@ class CreateValidator extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
-        return false;
+        return Gate::allows('store', User::class);
     }
 
     /**
@@ -21,10 +28,12 @@ class CreateValidator extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            //
+            'name'  => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'role'  => ['required', 'string', 'exists:roles,name'],
         ];
     }
 }
