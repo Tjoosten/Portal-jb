@@ -9,6 +9,7 @@ use Illuminate\Contracts\View\View;
 use Mpociot\Reanimate\ReanimateModels;
 use Spatie\Permission\Models\Role;
 use App\User;
+use App\Http\Requests\Users\CreateValidator;
 
 /**
  * Class AdminController
@@ -78,6 +79,27 @@ class AdminController extends Controller
     {
         $roles = Role::whereNotIn('name', ['huurder'])->get(['name']);
         return view('users.create', compact('roles'));
+    }
+
+    /**
+     * Methode voor het opslaan van een nieuwe administrator in de applicatie. 
+     * 
+     * @todo Register en embed de routering. 
+     * 
+     * @param  CreateValidator $inputDe form request class dat verantwoordelijk is voor de validatie.
+     * @return RedirectResponse
+     */
+    public function store(CreateValidator $input): RedirectResponse
+    {
+        // Geen authorizatie check nodig omdat dit gebeurd in de form request class. 
+        // Indien gebruiker geen permissies heeft zal dit resulteren in een HTTP 403 code. 
+
+        if ($user = new User($input->except('role'))) {
+            $user->assignRole($input->role);        // Koppel de gebruikersrol aan de gebruiker. 
+            $user->fireModelEvent('create-admin', false);  // Model observer voor registreren van het wachtwoord en de notificatie. 
+        }
+
+        return redirect()->route('admins.index');
     }
 
     /**
