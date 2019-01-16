@@ -1,7 +1,7 @@
 @extends ('layouts.app')
 
 @section('content')
-<div class="page-header">
+    <div class="page-header">
         <h1 class="page-title">Helpdesk ticket </h1>
 
         <div class="page-subtitle">Aangemaakt door {{ $ticket->creator->name }}</div>

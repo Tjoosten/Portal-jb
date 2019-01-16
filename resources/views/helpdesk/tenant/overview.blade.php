@@ -7,7 +7,7 @@
         <div class="page-subtitle">Mijn open vragen</div>
 
         <div class="page-options d-flex">
-            <a href="" class="btn btn-sgv-green mr-2">
+            <a href="{{ route('helpdesk.index.huurder') }}" class="btn btn-sgv-green mr-2">
                 <i class="fe fe-plus-circle"></i>
             </a>
 
@@ -17,9 +17,9 @@
                 </button>
                             
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="">Alle tickets</a>
-                    <a class="dropdown-item" href="">Open tickets</a>
-                    <a class="dropdown-item" href="">Gesloten tickets</a>
+                    <a class="dropdown-item" href="{{ route('helpdesk.overview.user') }}">Alle tickets</a>
+                    <a class="dropdown-item" href="{{ route('helpdesk.overview.user', ['filter' => 'open']) }}">Open tickets</a>
+                    <a class="dropdown-item" href="{{ route('helpdesk.overview.user', ['filter' => 'gesloten']) }}">Gesloten tickets</a>
                 </div>
             </div>
 

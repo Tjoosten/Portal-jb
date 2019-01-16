@@ -31,12 +31,14 @@ class TenantController extends Controller
     /**
      * Method voor het weergeven van de vragen die de aangemelde gebruiker heeft.
      *
+     * @param  Helpdesk $tickets  De databank entiteit van de helpdesk tickets.
+     * @param  Request  $request  De request informatie instantie.
      * @return View
      */
-    public function index(): View
+    public function index(Helpdesk $tickets, Request $request): View
     {
         $user = $this->auth->user();
-        $tickets = $user->questions()->latest()->simplePaginate();
+        $tickets = $tickets->getTicketsByType($request->filter)->whereCreatedBy($user->id)->simplePaginate();
 
         return view('helpdesk.tenant.overview', compact('tickets'));
     }

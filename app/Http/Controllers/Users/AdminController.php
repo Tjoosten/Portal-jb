@@ -7,6 +7,7 @@ use Illuminate\Http\{Request, RedirectResponse};
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\View\View;
 use Mpociot\Reanimate\ReanimateModels;
+use Spatie\Permission\Models\Role;
 use App\User;
 
 /**
@@ -75,7 +76,8 @@ class AdminController extends Controller
      */
     public function create(): View 
     {
-        return view('users.create');
+        $roles = Role::whereNotIn('name', ['huurder'])->get(['name']);
+        return view('users.create', compact('roles'));
     }
 
     /**

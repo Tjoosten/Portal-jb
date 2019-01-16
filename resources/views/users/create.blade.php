@@ -25,6 +25,27 @@
                 <input id="inputEmail" type="email" class="form-control @error('email', 'is-invalid')" placeholder="Email adres van de gebruiker" @input('email')>
                 @error('email')
             </div>
+
+            <div class="form-group col-6">
+                <label for="inputTel">Tel. nummer van de gebruiker</label>
+                <input id="inputTel" type="text" class="form-control" placeholder="Telefoon nummer van de gebruiker" @input('telephone_number')>
+            </div>
+
+            <div class="form-group col-6">
+                <label for="inputRole">Gebruikers rol voor de gebruiker <span class="text-danger">*</span></label>
+
+                <select class="custom-select @error('role', 'is-invalid')" @input('role')>
+                    <option value="">-- Selecteer de gebruikersrol --</option>
+
+                    @foreach ($roles as $role) {{-- LOOP door de gebruikers rollen --}}
+                        <option value="{{ $role->name }}" @if ($role->name === old('role')) selected @endif>
+                            {{ ucfirst($role->name) }}
+                        </option>
+                    @endforeach {{-- /// END loop --}}
+                </select>
+
+                @error('role') {{-- Validatie foutmelding view --}}
+            </div>
         </div>
 
         <hr class="mt-0">
