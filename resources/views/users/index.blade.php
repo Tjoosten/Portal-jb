@@ -7,7 +7,13 @@
         <div class="page-subtitle">
             @switch(request()->get('filter'))   
                 @case('deleted')    Verwijderde gebruikers en admins @break     
-                @default            Actieve leiding en admins       
+                @default {{-- Request kan een zoek opdracht zijn --}}
+
+                    @if (request()->has('term')) {{-- Controle of het echt een zoekopdracht is --}}
+                        Zoekresultaten voor <strong>{{ request()->term }}</strong>
+                    @else
+                        Actieve leiding en admin
+                    @endif
             @endswitch 
         </div>
 
@@ -16,20 +22,26 @@
                     <i class="fe fe-user-plus"></i>
                 </a>
 
-                <div class="btn-group">
-                    <button type="button" class="btn tw-rounded btn-sgv-green dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fe mr-1 fe-filter"></i> Filter
-                    </button>
-                            
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="{{ route('admins.index') }}">Actieve Leiding & admins</a>
-                        <a class="dropdown-item" href="">Non-actieve admins & leiding</a>
-                        <a class="dropdown-item" href="{{ route('admins.index', ['filter' => 'deleted']) }}">Verwijderde admins & leiding</a>
+                @if (! request()->has('term'))
+                    <div class="btn-group">
+                        <button type="button" class="btn tw-rounded btn-sgv-green dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fe mr-1 fe-filter"></i> Filter
+                        </button>
+
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="{{ route('admins.index') }}">Actieve Leiding & admins</a>
+                            <a class="dropdown-item" href="">Non-actieve admins & leiding</a>
+                            <a class="dropdown-item" href="{{ route('admins.index', ['filter' => 'deleted']) }}">Verwijderde admins & leiding</a>
+                        </div>
                     </div>
-                </div>
+                @else {{-- Het is een zoek opdracht dus geef de overizch knop weer --}}
+                    <a href="{{ route('admins.index') }}" class="btn btn-sgv-green">
+                        <i class="fe fe-users mr-1"></i> Overzicht
+                    </a>
+                @endif
                     
-                <form method="GET" action="" class="w-100 ml-2">
-                    <input type="text" class="form-control" placeholder="Zoek leiding of admin">
+                <form method="GET" action="{{ route('admins.search') }}" class="w-100 ml-2">
+                    <input type="text" class="form-control" @input('term') placeholder="Zoek leiding of admin">
                 </form>
             </div>
         </div>

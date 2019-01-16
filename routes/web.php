@@ -46,6 +46,7 @@ Route::get('helpdesk/comment/delete/{comment}', 'Helpdesk\CommentController@dest
 
 // Administrator routes
 Route::get('admins', 'Users\AdminController@index')->name('admins.index');
+Route::get('admins/zoek', 'Users\AdminController@search')->name('admins.search');
 Route::match(['get', 'delete'], 'admins/delete/{admin}', 'Users\AdminController@destroy')->name('admins.destroy');
 Route::get('admins/delete/{admin}/undo', 'Users\AdminController@undoDeleteRoute')->name('admins.delete.undo');
 Route::get('admins/nieuw', 'Users\AdminController@create')->name('admins.create');

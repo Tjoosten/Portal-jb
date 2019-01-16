@@ -52,8 +52,10 @@ class AdminController extends Controller
     /**
      * Method for deleting admin users in the application.
      *
-     * @param  Request $request  The form request instance that holds all the request information.
-     * @param  User    $admin    The resource entity form the given administrator.
+     * @throws \Illuminate\Validation\ValidationException
+     *
+     * @param  Request $request The form request instance that holds all the request information.
+     * @param  User $admin The resource entity form the given administrator.
      * @return View|RedirectResponse
      */
     public function destroy(Request $request, User $admin)
@@ -68,6 +70,23 @@ class AdminController extends Controller
         $admin->deleteUserAccount($request);
 
         return redirect()->route('admins.index');
+    }
+
+    /**
+     * Methode voor het zoeken van een leider of administrator in de applicatie.
+     *
+     * @param  Request $input De instantie dat alle form data bewaard.
+     * @return View
+     */
+    public function search(Request $input): View
+    {
+        $users = User::role(['admin', 'leiding'])
+            ->where('email', 'LIKE', "%{$input->term}%")
+            ->orWhere('name', 'LIKE', "%{$input->term}%")
+            ->orWhere('telephone_number', 'like', "%{$input->term}%")
+            ->simplePaginate();
+
+        return view('users.index', compact('users'));
     }
 
     /**
