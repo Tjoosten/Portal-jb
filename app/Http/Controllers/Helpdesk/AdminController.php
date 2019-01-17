@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Helpdesk;
 
+use App\User;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\Controller;
 use App\Models\Helpdesk;
@@ -23,8 +25,6 @@ class AdminController extends Controller
     public function __construct() 
     {
         parent::__construct(); // Initialiseer de globale constructor.
-
-        $this->middleware(['auth']);
         $this->middleware(['can:assign-ticket,ticket'])->only(['assign']); 
     }
 

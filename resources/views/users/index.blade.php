@@ -51,7 +51,7 @@
         @include ('flash::message') {{-- Flash session view instance --}}
 
         <div class="table-responsive">
-            <table class="table table-sm @if (count($users)) table-hover @endif mb-1">
+            <table class="table table-sm @if (count($users) > 0) table-hover @endif mb-1">
                 <thead>
                     <th scope="col" class="border-top-0">#</th>
                     <th scope="col" class="border-top-0">Naam</th>

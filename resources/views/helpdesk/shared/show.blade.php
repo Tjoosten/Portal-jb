@@ -33,9 +33,16 @@
                 </div>
 
                 <div class="btn-group" role="group" aria-label="Wijzig knop">
-                    <a href="" class="btn shadow-sm btn-ticket-option">
-                        <i class="fe mr-1 fe-list"></i> Mijn vragen
-                    </a>
+                    @if (Auth::user()->hasRole('huurder'))
+                        <a href="" class="btn shadow-sm btn-ticket-option">
+                            <i class="fe mr-1 fe-list"></i> Mijn vragen
+                        </a>
+                    @else  {{-- Authenticated user is administrator or leiding --}}
+                        <a href="{{ route('helpdesk.index.huurder') }}" class="btn shadow-sm btn-ticket-option">
+                            <i class="fe mr-1 fe-list"></i> Overzicht
+                        </a>
+                    @endif
+
                     <a href="{{ route('helpdesk.index.huurder') }}" class="btn shadow-sm btn-ticket-option">
                         <i class="fe mr-1 fe-plus"></i> Nieuw ticket
                     </a>
