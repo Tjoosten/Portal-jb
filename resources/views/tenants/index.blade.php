@@ -62,21 +62,21 @@
 
                             <td> {{-- Options --}}
                                 <span class="float-right">
-                                    <a href="" class="text-secondary mr-1">
+                                    <a href="{{ route('tenants.show', $tenant) }}" class="text-secondary no-underline mr-1">
                                         <i class="fe fe-eye"></i>
                                     </a>
                                     
                                     @if ($tenant->isBanned()) {{-- Huurder login is non-actief --}}
-                                        <a href="" class="text-success mr-1">
+                                        <a href="{{ route('tenants.status', ['status' => 'unlock', 'tenant' => $tenant]) }}" class="text-success no-underline mr-1">
                                             <i class="fe fe-unlock">
                                         </a>
                                     @else {{-- Huurder login is actief --}}
-                                        <a href="" class="text-danger mr-1">
+                                        <a href="{{ route('tenants.status', ['status' => 'lock', 'tenant' => $tenant]) }}" class="text-danger no-underline mr-1">
                                             <i class="fe fe-lock"></i>
                                         </a>
                                     @endif
 
-                                    <a href="" class="text-danger mr-1">
+                                    <a href="{{ route('tenants.destroy', $tenant) }}" class="text-danger no-underline mr-1">
                                         <i class="fe fe-x-circle"></i>
                                     </a>
                                 </span> 
