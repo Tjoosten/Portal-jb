@@ -46,15 +46,38 @@
                             <td>{{ $tenant->name }}</td>
 
                             <td> {{-- Status indicator --}}
+                                @if (is_null($tenant->password)) {{-- Login for tenant is not activated --}}
+                                    <span class="badge badge-danger">Niet geregistreerd</span>
+                                @else {{-- tenant login is activated --}}
+                                    @if ($tenant->isBanned()) {{-- Login for tenant is disabled by an admin --}}
+                                        <span class="badge badge-warning">Non actief</span> 
+                                    @else {{-- Tenant login is activated --}}
+                                        <span class="badge badge-success">Actief</span>
+                                    @endif
+                                @endif
                             </td> {{-- /// END status indicator --}}
                         
-                            <td>{{ $tenant->email }}</td>
+                            <td><a href="mailto:{{ $tenant->email }}">{{ $tenant->email }}</a></td>
                             <td>{{ $tenant->telephone_number }}</td>
 
                             <td> {{-- Options --}}
                                 <span class="float-right">
                                     <a href="" class="text-secondary mr-1">
                                         <i class="fe fe-eye"></i>
+                                    </a>
+                                    
+                                    @if ($tenant->isBanned()) {{-- Huurder login is non-actief --}}
+                                        <a href="" class="text-success mr-1">
+                                            <i class="fe fe-unlock">
+                                        </a>
+                                    @else {{-- Huurder login is actief --}}
+                                        <a href="" class="text-danger mr-1">
+                                            <i class="fe fe-lock"></i>
+                                        </a>
+                                    @endif
+
+                                    <a href="" class="text-danger mr-1">
+                                        <i class="fe fe-x-circle"></i>
                                     </a>
                                 </span> 
                             </td> {{-- /// END options --}}
