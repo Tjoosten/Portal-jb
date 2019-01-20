@@ -16,9 +16,10 @@
                 </button>
 
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="">Alle tickets</a>
-                    <a class="dropdown-item" href="">Open tickets</a>
-                    <a class="dropdown-item" href="">Gesloten tickets</a>
+                    <a class="dropdown-item" href="{{ route('helpdesk.index.huurder') }}">Alle tickets</a>
+                    <a class="dropdown-item" href="{{ route('helpdesk.index.huurder', ['filter' => 'open']) }}">Open tickets</a>
+                    <a class="dropdown-item" href="{{ route('helpdesk.index.huurder', ['filter' => 'gesloten']) }}">Gesloten tickets</a>
+                    <a class="dropdown-item" href="{{ route('helpdesk.index.huurder', ['filter' => 'toegegwezen']) }}">Toegewezen tickets</a>
                 </div>
             </div>
 
@@ -60,9 +61,12 @@
                                     <a href="{{ route('helpdesk.ticket.show', $ticket) }}" class="text-secondary no-underline mr-1">
                                         <i class="fe fe-eye"></i>
                                     </a>
-                                    <a href="" class="text-danger mr-1 no-underline"> {{-- ticket sluiten  --}}
-                                        <i class="fe fe-x-circle"></i>
-                                    </a>
+
+                                    @if (Auth::user()->can('close-ticket', $ticket))
+                                        <a href="{{ route('helpdesk.ticket.status', ['status' => 'sluiten', 'ticket' => $ticket]) }}" class="text-danger mr-1 no-underline"> {{-- ticket sluiten  --}}
+                                            <i class="fe fe-x-circle"></i>
+                                        </a>
+                                    @endif 
                                 </span>
                             </td> {{-- /// Options --}}
                         </tr>

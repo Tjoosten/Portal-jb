@@ -40,6 +40,12 @@ Route::get('helpdesk/ticket/{ticket}', 'Helpdesk\SharedController@show')->name('
 Route::get('helpdesk/ticket/assign/{ticket}', 'Helpdesk\AdminController@assign')->name('helpdesk.ticket.assign');
 Route::get('helpdesk/ticket/{ticket}/{status}', 'Helpdesk\SharedController@status')->name('helpdesk.ticket.status');
 
+// Calendar Routes
+Route::get('calendar', 'Lease\CalendarController@index')->name('calendar.index');
+
+// Tenant Routes
+Route::get('huurders', 'Lease\TenantController@index')->name('tenants.index');
+
 // Helpdesk comment routes
 Route::post('helpdesk/{ticket}/reageer', 'Helpdesk\CommentController@store')->name('helpdesk.comment');
 Route::get('helpdesk/comment/delete/{comment}', 'Helpdesk\CommentController@destroy')->name('helpdesk.comment.delete');

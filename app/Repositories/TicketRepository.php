@@ -54,9 +54,7 @@ class TicketRepository extends Model
             case 'gesloten':    return $this->whereIsOpen(false); 
             case 'open':        return $this->whereIsOpen(true);
             case 'toegewezen':  return $this->whereAssigned(auth()-user()->id); 
-            case 'vraag':       return $this->whereType('vraag'); 
-            case 'opmerkingen': return $this->whereType('opmerking');
-
+            
             // Geen valide filter is opgegeven dus return alle helpdesk tickets.
             default: return $this->latest();
         }

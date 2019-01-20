@@ -77,12 +77,12 @@
                     @endif
 
                     @if (Auth::user()->hasAnyRole('admin', 'leiding')) 
-                        <a href="" class="nav-link {{ active('calendar.*')  }}">
+                        <a href="{{ route('calendar.index') }}" class="nav-link {{ active('calendar.*')  }}">
                             <i class="fe fe-calendar mr-1"></i>
                             Kalender
                         </a>
 
-                        <a href="" class="nav-link {{ active('huurders.*') }}">
+                        <a href="{{ route('tenants.index') }}" class="nav-link {{ active('tenants.*') }}">
                             <i class="fe mr-1 fe-users"></i> Huurders
                         </a>
                         
