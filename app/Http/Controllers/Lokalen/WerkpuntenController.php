@@ -26,7 +26,7 @@ class WerkpuntenController extends Controller
     public function __constructor() 
     {
         parent::__construct();
-        $this->middelware(['auth', 'role:admin,leiding']);
+        $this->middelware(['auth', 'role:admin,leiding', 'forbid-banned-user']);
     }
 
     /**

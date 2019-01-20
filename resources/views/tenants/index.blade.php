@@ -52,6 +52,11 @@
                             <td>{{ $tenant->telephone_number }}</td>
 
                             <td> {{-- Options --}}
+                                <span class="float-right">
+                                    <a href="" class="text-secondary mr-1">
+                                        <i class="fe fe-eye"></i>
+                                    </a>
+                                </span> 
                             </td> {{-- /// END options --}}
                         </tr>
                     @endforeach {{-- /// END loop --}}

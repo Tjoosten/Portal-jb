@@ -24,7 +24,7 @@ class SettingsController extends Controller
     public function __construct() 
     {
         parent::__construct(); // Initiate the global constructor for the controllers.
-        $this->middleware(['auth']);
+        $this->middleware(['auth', 'forbid-banned-user']);
     }
 
     /**

@@ -23,7 +23,7 @@ class ActivityController extends Controller
     public function __construct() 
     {
         parent::__construct(); // Initialiseer de globale constructor
-        $this->middleware(['role:admin,webmaster']);
+        $this->middleware(['role:admin,webmaster', 'forbid-banned-user']);
     }
 
     /**

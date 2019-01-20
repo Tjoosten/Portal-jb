@@ -22,7 +22,7 @@ class CalendarController extends Controller
     public function __construct()
     {
         parent::__construct(); // Initialiseer de globale constructor
-        $this->middleware(['auth', 'role:admin|leiding']);
+        $this->middleware(['auth', 'role:admin|leiding', 'forbid-banned-user']);
     }
 
     /**

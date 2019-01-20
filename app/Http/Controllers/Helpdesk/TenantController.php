@@ -25,7 +25,7 @@ class TenantController extends Controller
     public function __construct()
     {
         parent::__construct(); // Initialiseer de globale controller
-        $this->middleware(['auth', 'role:leiding|admin']);
+        $this->middleware(['auth', 'role:huurder', 'forbid-banned-user']);
     }
 
     /**

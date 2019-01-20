@@ -22,7 +22,7 @@ class TenantController extends Controller
     public function __construct() 
     {
         parent::__construct(); // Initialiseer de globale constructor
-        $this->middleware(['auth', 'role:admin|leiding']);
+        $this->middleware(['auth', 'role:admin|leiding', 'forbid-banned-user']);
     }
 
     /**
@@ -36,5 +36,19 @@ class TenantController extends Controller
         return view('tenants.index', [
             'tenants' => $users->role('huurder')->simplePaginate()
         ]);
+    }
+
+    /**
+     * Methode voor het weergeven van de data omtrent de huurder. 
+     * 
+     * @todo Build up the application view. 
+     * @todo Register route
+     * 
+     * @param  User $tenant De gebruikers entiteit van de user. 
+     * @return View 
+     */
+    public function show(User $tenant): View
+    {
+        return view('tenants.show', compact('tenant'));
     }
 }

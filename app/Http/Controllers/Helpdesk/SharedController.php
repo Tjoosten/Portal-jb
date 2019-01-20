@@ -27,7 +27,7 @@ class SharedController extends Controller
     public function __construct() 
     {
         parent::__construct(); // Initialiseer de globale constructor in de controller. 
-        $this->middleware(['auth']);
+        $this->middleware(['auth', 'forbid-banned-user']);
     }
 
     /**

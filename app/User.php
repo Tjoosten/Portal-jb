@@ -11,6 +11,8 @@ use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Cache;
+use Cog\Contracts\Ban\Bannable as BannableContract;
+use Cog\Laravel\Ban\Traits\Bannable;
 
 /**
  * Class User
@@ -19,7 +21,7 @@ use Illuminate\Support\Facades\Cache;
  */
 class User extends UserRepository
 {
-    use Notifiable, HasRoles, SoftDeletes, ActivityLog;
+    use Notifiable, HasRoles, SoftDeletes, ActivityLog, Bannable;
 
     /**
      * The attributes that are mass assignable.

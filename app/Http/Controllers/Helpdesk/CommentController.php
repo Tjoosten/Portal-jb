@@ -22,7 +22,7 @@ class CommentController extends Controller
     public function __construct()
     {
         parent::__construct();
-        $this->middleware(['auth']); // Initialiseer de globale constructor.
+        $this->middleware(['auth', 'forbid-banned-user']); // Initialiseer de globale constructor.
     }
 
     /**

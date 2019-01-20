@@ -22,7 +22,7 @@ class DashboardController extends Controller
     public function __construct() 
     {
         parent::__construct(); // Initialiseer de glable controller constructor. 
-        $this->middleware(['auth']);
+        $this->middleware(['auth', 'forbid-banned-user']);
     }
 
     /**

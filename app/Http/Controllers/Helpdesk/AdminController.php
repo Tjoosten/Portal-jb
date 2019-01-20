@@ -25,7 +25,7 @@ class AdminController extends Controller
     public function __construct() 
     {
         parent::__construct(); // Initialiseer de globale constructor.
-        $this->middleware(['can:assign-ticket,ticket'])->only(['assign']); 
+        $this->middleware(['auth', 'can:assign-ticket,ticket', 'forbid-banned-user'])->only(['assign']); 
     }
 
     /**

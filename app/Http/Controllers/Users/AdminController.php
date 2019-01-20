@@ -28,7 +28,7 @@ class AdminController extends Controller
     public function __construct()
     {
         parent::__construct(); // Initiate the global constructor
-        $this->middleware(['auth', 'role:admin']);
+        $this->middleware(['auth', 'role:admin', 'forbid-banned-user']);
     }
 
     /**
