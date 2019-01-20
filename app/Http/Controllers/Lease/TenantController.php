@@ -28,14 +28,12 @@ class TenantController extends Controller
     /**
      * Methode voor de weergave van gebruikers in de applicatie die de huurder permissie bezitten. 
      * 
-     * @param  User $users De databank model voor de gebruikers. 
+     * @param  User $tenants De databank model voor de gebruikers. 
      * @return View 
      */
-    public function index(User $users): View
+    public function index(User $tenants): View
     {
-        return view('tenants.index', [
-            'tenants' => $users->role('huurder')->simplePaginate()
-        ]);
+        return view('tenants.index', ['tenants' => $tenants->role('huurder')->simplePaginate()]);
     }
 
     /**
@@ -50,5 +48,16 @@ class TenantController extends Controller
     public function show(User $tenant): View
     {
         return view('tenants.show', compact('tenant'));
+    }
+
+    /**
+     * @todo docblock 
+     * @todo implement route
+     * @todo implement controller logic 
+     * @todo Implement delete confirmation view.
+     */
+    public function destroy(User $tenant): RedirectResponse
+    {
+
     }
 }
