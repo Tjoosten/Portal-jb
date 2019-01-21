@@ -9,6 +9,7 @@ use Illuminate\Contracts\View\View;
 use Mpociot\Reanimate\ReanimateModels;
 use Spatie\Permission\Models\Role;
 use App\User;
+use App\Notifications\Users\CreatedMail;
 use App\Http\Requests\Users\CreateValidator;
 
 /**
@@ -116,6 +117,13 @@ class AdminController extends Controller
         if ($user = User::create($input->all())) {
             $user->assignRole($input->role); // Koppel de gebruikersrol aan de gebruiker.
             $this->auth->user()->logActivity("Heeft een login aangemaakt voor {$user->name} geannuleerd in de applicatie.", 'Admins & Leiding');
+
+            $password = str_random(15);
+
+            if ($user->update(['password' => $password])) { // Het wachtwoord voor de nieuwe gebruiker is aangepast in de databank.
+                $when = now()->addMinute();
+                $user->notify((new CreatedMail($password))->delay($when));
+            }
         }
 
         return redirect()->route('admins.index');
