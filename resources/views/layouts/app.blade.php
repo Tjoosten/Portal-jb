@@ -76,7 +76,7 @@
                         </a>
                     @endif
 
-                    @if (Auth::user()->hasAnyRole('admin', 'leiding')) 
+                    @if (Auth::user()->hasAnyRole(['admin', 'leiding'])) 
                         <a href="{{ route('calendar.index') }}" class="nav-link {{ active('calendar.*')  }}">
                             <i class="fe fe-calendar mr-1"></i>
                             Kalender

@@ -43,8 +43,14 @@ Route::get('helpdesk/ticket/{ticket}/{status}', 'Helpdesk\SharedController@statu
 // Calendar Routes
 Route::get('calendar', 'Lease\CalendarController@index')->name('calendar.index');
 
+// Tenant billing information routes
+Route::get('huurders/facturatie/{user}', 'Lease\Tenants\BillableController@index')->name('tenants.billing');
+
 // Tenant Routes
-Route::get('huurders', 'Lease\TenantController@index')->name('tenants.index');
+Route::get('huurders', 'Lease\Tenants\IndexController@index')->name('tenants.index');
+Route::get('huurders/{tenant}', 'Lease\Tenants\IndexController@show')->name('tenants.show');
+Route::get('huurders/{tenant}/{status}', 'Lease\Tenants\IndexController@status')->name('tenants.status');
+Route::match(['get', 'delete'], 'huurders/verwijder/{tenant}', 'Lease\Tenants\IndexController@destroy')->name('tenants.destroy');
 
 // Helpdesk comment routes
 Route::post('helpdesk/{ticket}/reageer', 'Helpdesk\CommentController@store')->name('helpdesk.comment');

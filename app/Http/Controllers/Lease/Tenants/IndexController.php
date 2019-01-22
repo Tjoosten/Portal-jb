@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Lease;
+namespace App\Http\Controllers\Lease\Tenants;
 
 use App\User;
-use Illuminate\Http\Request;
+use Illuminate\Http\{Request, RedirectResponse};
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\View\View;
 
@@ -12,10 +12,10 @@ use Illuminate\Contracts\View\View;
  * 
  * @package App\Http\Controllers\Lease
  */
-class TenantController extends Controller
+class IndexController extends Controller
 {
     /**
-     * Create een nieuwe TentantController instantie 
+     * Create een nieuwe IndexController instantie 
      * 
      * @return void 
      */
@@ -39,9 +39,6 @@ class TenantController extends Controller
     /**
      * Methode voor het weergeven van de data omtrent de huurder. 
      * 
-     * @todo Build up the application view. 
-     * @todo Register route
-     * 
      * @param  User $tenant De gebruikers entiteit van de user. 
      * @return View 
      */
@@ -51,13 +48,26 @@ class TenantController extends Controller
     }
 
     /**
-     * @todo docblock 
-     * @todo implement route
-     * @todo implement controller logic 
-     * @todo Implement delete confirmation view.
+     * Methode om de login status van de gebruiker aan te passen in de applicatie. 
+     * 
+     * @param  User     $tenant 
+     * @param  string   $status De status naam voor de login permissie van de gebruiker. 
+     * @return RedirectResponse
      */
-    public function destroy(User $tenant): RedirectResponse
+    public function status(User $tenant, string $status): RedirectResponse 
     {
 
+    }
+
+    /**
+     * Methode voor het verwijderen van een huurder in de applicatie. 
+     * 
+     * @param  Request $request De instantie dat alle data omtrent de request bijhoud. 
+     * @param  User    $tenant  De gebruikers entiteit van de huurder. 
+     * @return View|RedirectResponse
+     */
+    public function destroy(Request $request, User $tenant)
+    {
+        // 
     }
 }

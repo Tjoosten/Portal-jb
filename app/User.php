@@ -2,11 +2,11 @@
 
 namespace App;
 
-use App\Models\Helpdesk;
+use App\Models\{Helpdesk, Billing};
 use App\Traits\ActivityLog;
 use App\Repositories\UserRepository;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\{BelongsTo, HasMany};
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -73,6 +73,16 @@ class User extends UserRepository
     public function questions(): HasMany
     {
         return $this->hasMany(Helpdesk::class, 'created_by');
+    }
+
+    /**
+     * Data relatie voor de facturatie gegevens van de gebruikers. 
+     * 
+     * @return BelongsTo
+     */
+    public function billingInformation(): BelongsTo
+    {
+        return $this->belongsTo(Billing::class, 'billing_info');
     }
 
     /**
