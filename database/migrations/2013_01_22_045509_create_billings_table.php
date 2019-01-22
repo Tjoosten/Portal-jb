@@ -22,8 +22,7 @@ class CreateBillingsTable extends Migration
             $table->string('achternaam'); 
             $table->string('groepsnaam');
             $table->string('email'); 
-            $table->string('straat'); 
-            $table->string('huis_nummer'); 
+            $table->string('adres'); 
             $table->string('postcode'); 
             $table->string('stad'); 
             $table->string('land');

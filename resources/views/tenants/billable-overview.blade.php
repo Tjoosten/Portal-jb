@@ -51,7 +51,42 @@
 
                     <div class="form-group col-6">
                         <label for="inputGroep">Groepsnaam</label>
-                        
+                        <input type="text" id="inputGroep" placeholder="Groepsnaam" class="form-control @error('groepsnaam', 'is-invalid')" @input('groepsnaam') placeholder="Naam van zijn/haar groep">
+                        @error('groepsnaam')
+                    </div>
+                </div>
+
+                <hr class="mt-0">
+
+                <div class="form-row">
+                    <div class="form-group col-12">
+                        <label id="inputAdres">Adres + Huis nr. <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control @error('adres', 'is-invalid')" id="inputAdres" placeholder="Adres + huis nr." @input('adres')>
+                        @error('adres')
+                    </div>
+
+                    <div class="form-group col-4">
+                        <label for="inputPostcode">Postcode <span class="text-danger">*</span></label>
+                        <input type="text" id="inputPostcode" class="form-control @error('postcode', 'is-invalid')" placeholder="Postcode" @input('postcode')>
+                    </div>
+
+                    <div class="form-group col-4">
+                        <label for="inputCity">Stad <span class="text-danger">*</span></label>
+                    </div>
+
+                    <div class="form-group col-4">
+                        <label for="inputLand">Land <span class="text-danger">*</span></label>
+                        <input type="text" id="inputLand" class="form-control @error('land', 'is-invalid')" placeholder="Land" @input('land')>
+                        @error('land')
+                    </div>
+                </div>
+
+                <hr class="mt-0">
+
+                <div class="form-row">
+                    <div class="form-group mb-0 col-6">
+                        <button type="submit" class="btn btn-success">Aanpassen</button>
+                        <button type="reset" class="btn btn-light">Annuleren</button>
                     </div>
                 </div>
             </form>
