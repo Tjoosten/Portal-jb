@@ -19,10 +19,10 @@
     <div class="row">
         <div class="col-3"> {{-- Sidenav --}}
             @include ('tenants.components.sidenav', ['tenant' => $user])
-        </div> {{-- /// END sidenav --}} 
+        </div> {{-- /// END sidenav --}}
 
         <div class="col-9"> {{-- Content --}}
-            <form method="POST" action="{{ route('tenants.billing.store', $billable) }}" class="card card-body shadow-sm mb-3 py-3">
+            <form method="POST" action="{{ route('tenants.billing.store', $billable->user) }}" class="card card-body shadow-sm mb-3 py-3">
                 @csrf               {{-- Form field protection --}}
                 @method('PATCH')    {{-- HTTP method spoofing --}}
                 @form($billable)    {{-- Bind the billable data from the account to the view --}}
@@ -47,7 +47,7 @@
                     <div class="form-group col-6">
                         <label for="inputEmail">E-mail adres <span class="text-danger">*</span></label>
                         <input type="email" id="inputEmail" placeholder="E-mail adres" class="form-control @error('email', 'is-invalid')" @input('email')>
-                        @error('email') 
+                        @error('email')
                     </div>
 
                     <div class="form-group col-6">
@@ -93,6 +93,6 @@
                     </div>
                 </div>
             </form>
-        </div> {{-- /// END content --}} 
+        </div> {{-- /// END content --}}
     </div>
 @endsection

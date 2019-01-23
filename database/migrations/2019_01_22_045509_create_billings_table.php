@@ -18,15 +18,19 @@ class CreateBillingsTable extends Migration
     {
         Schema::create('billings', function (Blueprint $table): void {
             $table->increments('id');
-            $table->string('voornaam');
-            $table->string('achternaam'); 
-            $table->string('groepsnaam');
-            $table->string('email'); 
-            $table->string('adres'); 
-            $table->string('postcode'); 
-            $table->string('stad'); 
-            $table->string('land');
+            $table->unsignedInteger('user_id');
+            $table->string('voornaam')->nullable();
+            $table->string('achternaam')->nullable();
+            $table->string('groepsnaam')->nullable();
+            $table->string('email')->nullable();
+            $table->string('adres')->nullable();
+            $table->string('postcode')->nullable();
+            $table->string('stad')->nullable();
+            $table->string('land')->nullable();
             $table->timestamps();
+
+            // Foreign key constraints
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

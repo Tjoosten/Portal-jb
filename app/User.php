@@ -6,7 +6,7 @@ use App\Models\{Helpdesk, Billing};
 use App\Traits\ActivityLog;
 use App\Repositories\UserRepository;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\{HasOne, HasMany};
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -45,8 +45,8 @@ class User extends UserRepository
     protected $hidden = ['password', 'remember_token'];
 
     /**
-     * Determine whether when the user is online or not. 
-     * 
+     * Determine whether when the user is online or not.
+     *
      * @return bool
      */
     public function isOnline(): bool
@@ -55,12 +55,12 @@ class User extends UserRepository
     }
 
     /**
-     * Method for hashing the given password in the application storage. 
-     * 
+     * Method for hashing the given password in the application storage.
+     *
      * @param  string $password The given or generated password from the application/form.
      * @return void
      */
-    public function setPasswordAttribute(string $password): void 
+    public function setPasswordAttribute(string $password): void
     {
         $this->attributes['password'] = bcrypt($password);
     }
@@ -76,19 +76,19 @@ class User extends UserRepository
     }
 
     /**
-     * Data relatie voor de facturatie gegevens van de gebruikers. 
-     * 
+     * Data relatie voor de facturatie gegevens van de gebruikers.
+     *
      * @return HasMany
      */
-    public function billingInformation(): HasMany
+    public function billingInformation(): HasOne
     {
-        return $this->HasMany(Billing::class);
+        return $this->HasOne(Billing::class);
     }
 
     /**
      * Get all the users that are registered on the current day.
      *
-     * @param  Builder $query The Eloquent ORm query builder instance. 
+     * @param  Builder $query The Eloquent ORm query builder instance.
      * @return Builder
      */
     public function scopeRegisteredToday($query): Builder

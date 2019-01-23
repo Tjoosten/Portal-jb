@@ -104,7 +104,7 @@ class AdminController extends Controller
     /**
      * Methode voor het opslaan van een nieuwe administrator in de applicatie.
      *
-     * @see \App\App\Observers\UserObserver::created()
+     * @see \App\App\Observers\UserObserver::created() - voor het aanmaken van de basis facturatie gegevens.
      *
      * @param  CreateValidator $inputDe form request class dat verantwoordelijk is voor de validatie.
      * @return RedirectResponse
