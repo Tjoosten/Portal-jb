@@ -82,7 +82,7 @@ class User extends UserRepository
      */
     public function billingInformation(): HasMany
     {
-        return $this->HasMany(Billing::class, 'billing_info');
+        return $this->HasMany(Billing::class);
     }
 
     /**

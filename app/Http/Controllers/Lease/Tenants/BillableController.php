@@ -44,15 +44,15 @@ class BillableController extends Controller
         // 
         //
         if ($billable->isFilledIn(false)) {
-            $billable->storeData($input->all());
+            $information = $billable->storeData($input->all());
         } 
         
         // Geen facturatie data voor de gebruiker gevonden. Dus slaag alle data op in de database. 
         // En attacheer deze aan de gebruikers data van de aangemelde gebruiker.    
         else {
-           $billable->updateData($input->all());        
+           $information = $billable->updateData($input->all());        
         }
 
-        return 
+        return redirect()->route('tenants.show', $information->user);
     }
 }
