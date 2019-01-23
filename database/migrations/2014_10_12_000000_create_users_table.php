@@ -15,7 +15,6 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('billing_info')->nullable();
             $table->string('name');
             $table->string('email')->unique();
             $table->string('telephone_number')->nullable();
@@ -27,9 +26,6 @@ class CreateUsersTable extends Migration
             $table->datetime('last_login_at')->nullable();
             $table->softDeletes();
             $table->timestamps();
-
-            // Foreign keys 
-            $table->foreign('billing_info')->references('id')->on('billings')->onDelete('CASCADE');
         });
     }
 

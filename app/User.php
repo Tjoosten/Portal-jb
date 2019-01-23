@@ -6,7 +6,7 @@ use App\Models\{Helpdesk, Billing};
 use App\Traits\ActivityLog;
 use App\Repositories\UserRepository;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Relations\{BelongsTo, HasMany};
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -78,11 +78,11 @@ class User extends UserRepository
     /**
      * Data relatie voor de facturatie gegevens van de gebruikers. 
      * 
-     * @return BelongsTo
+     * @return HasMany
      */
-    public function billingInformation(): BelongsTo
+    public function billingInformation(): HasMany
     {
-        return $this->belongsTo(Billing::class, 'billing_info');
+        return $this->HasMany(Billing::class, 'billing_info');
     }
 
     /**

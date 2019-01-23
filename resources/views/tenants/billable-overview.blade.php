@@ -22,7 +22,8 @@
         </div> {{-- /// END sidenav --}} 
 
         <div class="col-9"> {{-- Content --}}
-            <form class="card card-body shadow-sm mb-3 py-3">
+            <form method="POST" action="{{ route('tenants.billing.store', $billable) }}" class="card card-body shadow-sm mb-3 py-3">
+                @csrf               {{-- Form field protection --}}
                 @method('PATCH')    {{-- HTTP method spoofing --}}
                 @form($billable)    {{-- Bind the billable data from the account to the view --}}
 
@@ -72,6 +73,8 @@
 
                     <div class="form-group col-4">
                         <label for="inputCity">Stad <span class="text-danger">*</span></label>
+                        <input type="text" id="inputCity" class="form-control @error('stad', 'is-invalid')" @input('stad') placeholder="Stad">
+                        @error('stad')
                     </div>
 
                     <div class="form-group col-4">

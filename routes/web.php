@@ -44,6 +44,7 @@ Route::get('helpdesk/ticket/{ticket}/{status}', 'Helpdesk\SharedController@statu
 Route::get('calendar', 'Lease\CalendarController@index')->name('calendar.index');
 
 // Tenant billing information routes
+Route::patch('huurders/facturatie/{billable?}', 'Lease\Tenants\BillableController@store')->name('tenants.billing.store');
 Route::get('huurders/facturatie/{user}', 'Lease\Tenants\BillableController@index')->name('tenants.billing');
 
 // Tenant Routes

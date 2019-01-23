@@ -6,6 +6,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Http\Controllers\Controller;
+use App\Models\Billing;
 
 /**
  * Class BillableController 
@@ -36,5 +37,22 @@ class BillableController extends Controller
         return view('tenants.billable-overview', [
             'user' => $user, 'billable' => $user->billingInformation
         ]);
+    }
+
+    public function store(?Billing $billable): RedirectResponse
+    {
+        // 
+        //
+        if ($billable->isFilledIn(false)) {
+            $billable->storeData($input->all());
+        } 
+        
+        // Geen facturatie data voor de gebruiker gevonden. Dus slaag alle data op in de database. 
+        // En attacheer deze aan de gebruikers data van de aangemelde gebruiker.    
+        else {
+           $billable->updateData($input->all());        
+        }
+
+        return 
     }
 }
