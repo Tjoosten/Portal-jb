@@ -23,7 +23,7 @@
         </a>
     @else {{-- Gebruiker kan inloggen --}}
         @if ($tenant->isNotBanned()) {{-- Huurder login is actief --}}
-            <a href="" class="list-group-item list-group-item-action">
+            <a href="{{ route('logins.lock', $tenant) }}" class="list-group-item list-group-item-action {{ active('logins.lock') }}">
                 <i class="fe fe-lock mr-2"></i> Login blokkeren
             </a>
         @endif

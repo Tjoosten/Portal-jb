@@ -40,6 +40,9 @@ Route::get('helpdesk/ticket/{ticket}', 'Helpdesk\SharedController@show')->name('
 Route::get('helpdesk/ticket/assign/{ticket}', 'Helpdesk\AdminController@assign')->name('helpdesk.ticket.assign');
 Route::get('helpdesk/ticket/{ticket}/{status}', 'Helpdesk\SharedController@status')->name('helpdesk.ticket.status');
 
+// Login lock routes
+Route::get('/users/lock/{user}', 'Users\LockController@create')->name('logins.lock');
+
 // Calendar Routes
 Route::get('calendar', 'Lease\CalendarController@index')->name('calendar.index');
 

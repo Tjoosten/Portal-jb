@@ -19,9 +19,9 @@ class AclTableSeeder extends Seeder
     {
         $this->seedDefaultPermissions(); // Staat eerst wegens de permissies die later gebruikt in de toegangs rollen. 
 
-        if ($this->command->confirm('Create roles for the user(s), default is admin, leiding and huurder.', true)) {
+        if ($this->command->confirm('Create roles for the user(s), default is webmaster, admin, leiding and huurder.', true)) {
             // Confirm and ask for application specific roles in the application. 
-            $inputRoles = $this->command->ask('Enter roles in comma separated format.', 'admin, leiding, huurder');
+            $inputRoles = $this->command->ask('Enter roles in comma separated format.', 'webmaster, admin, leiding, huurder');
             $this->createRoleIfNotExists($inputRoles);
         } else {
             // Only the default user is needed

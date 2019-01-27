@@ -67,11 +67,11 @@
                                     </a>
                                     
                                     @if ($tenant->isBanned()) {{-- Huurder login is non-actief --}}
-                                        <a href="{{ route('tenants.status', ['status' => 'unlock', 'tenant' => $tenant]) }}" class="text-success no-underline mr-1">
+                                        <a href="{{ route('tenants.status', $tenant) }}" class="text-success no-underline mr-1">
                                             <i class="fe fe-unlock">
                                         </a>
                                     @else {{-- Huurder login is actief --}}
-                                        <a href="{{ route('tenants.status', ['status' => 'lock', 'tenant' => $tenant]) }}" class="text-danger no-underline mr-1">
+                                        <a href="{{ route('logins.lock', $tenant) }}" class="text-danger no-underline mr-1">
                                             <i class="fe fe-lock"></i>
                                         </a>
                                     @endif

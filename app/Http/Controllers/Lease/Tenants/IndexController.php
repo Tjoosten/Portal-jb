@@ -48,18 +48,6 @@ class IndexController extends Controller
     }
 
     /**
-     * Methode om de login status van de gebruiker aan te passen in de applicatie. 
-     * 
-     * @param  User     $tenant 
-     * @param  string   $status De status naam voor de login permissie van de gebruiker. 
-     * @return RedirectResponse
-     */
-    public function status(User $tenant, string $status): RedirectResponse 
-    {
-
-    }
-
-    /**
      * Methode voor het verwijderen van een huurder in de applicatie. 
      * 
      * @param  Request $request De instantie dat alle data omtrent de request bijhoud. 
