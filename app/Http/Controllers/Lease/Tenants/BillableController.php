@@ -53,17 +53,19 @@ class BillableController extends Controller
      */
     public function store(BillableValidator $input, User $user): RedirectResponse
     {
+        $information = $user->billingInformation->update($input->all());
+
         // Check of de gegeven gebruiker een huurder is. En dat alle facturatie data is aangepast door
         // de ->billingInformation(); relatie.
-        if ($user->hasRole('huurder') && $information = $user->billingInformation()->update($input->all())) {
+        if ($user->hasRole('huurder') && $information) {
 
             // Indien de gegeven gebruiker niet de zelfde is dan de aangemelde gebruiker.
             // Moet deze actie gelogd worden in het systeem.
-            if ($this->auth->user()->is($user)) {
-                $user->billingInformation()->logActivity("Heeft de facturatie gegevens voor {$user->name} aangepast", 'Facturatie');
+            if (! $this->auth->user()->is($user)) {
+                $user->billingInformation->logActivity("Heeft de facturatie gegevens voor {$user->name} aangepast", 'Facturatie');
             }
 
-            return redirect()->route('tenants.show', $information->user);
+            return redirect()->route('tenants.billing', $user);
         }
 
         // Kan de facturatie niet aanpassen dus herleid de aangemelde gebruiker terug naar de facturatie gegevens weergave.

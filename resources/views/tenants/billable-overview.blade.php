@@ -9,7 +9,7 @@
         </div>
 
         <div class="page-options d-flex">
-            <a href="" class="btn btn-sgv-green shadow-sm mr-2">
+            <a href="{{ route('tenants.index') }}" class="btn btn-sgv-green shadow-sm mr-2">
                 <i class="fe fe-list mr-1"></i> Overzicht
             </a>
         </div>
@@ -40,7 +40,7 @@
 
                     <div class="form-group col-6">
                         <label for="inputLastName">Achternaam <span class="text-danger">*</span></label>
-                        <input type="text" id="inputLastName" placeholder="achternaam" class="form-control @error('achternaam', 'is-invalid')" @input('lastname')>
+                        <input type="text" id="inputLastName" placeholder="achternaam" class="form-control @error('achternaam', 'is-invalid')" @input('achternaam')>
                         @error('achternaam')
                     </div>
 
@@ -69,6 +69,7 @@
                     <div class="form-group col-4">
                         <label for="inputPostcode">Postcode <span class="text-danger">*</span></label>
                         <input type="text" id="inputPostcode" class="form-control @error('postcode', 'is-invalid')" placeholder="Postcode" @input('postcode')>
+                        @error('postcode')
                     </div>
 
                     <div class="form-group col-4">

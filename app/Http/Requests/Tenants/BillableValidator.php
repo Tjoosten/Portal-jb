@@ -18,7 +18,7 @@ class BillableValidator extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return auth()->user()->hasRole(['leiding', 'admin']);
     }
 
     /**
@@ -26,10 +26,16 @@ class BillableValidator extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-
+            'voornaam'      => ['required', 'string', 'max:191'],
+            'achternaam'    => ['required', 'string', 'max:191'],
+            'email'         => ['required', 'string', 'max:191'],
+            'postcode'      => ['required', 'integer', 'max:30'],
+            'stad'          => ['required', 'string', 'max:191'],
+            'land'          => ['required', 'string', 'max:191'],
+            'adres'         => ['required', 'string', 'max:191']
         ];
     }
 }
