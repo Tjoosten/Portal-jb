@@ -22,44 +22,39 @@ class LockController extends Controller
     public function __construct()
     {
         parent::__construct(); // Initialiseer de globale constructor
-        $this->middleware(['auth', 'role:admin']);
+        $this->middleware(['auth', 'role:admin', 'forbid-banned-user']);
     }
 
     /**
      * Methode voor het weergeven van het blokkade formulier in de applicatie.
-     *
-     * @todo Register route
-     * @todo Build up the application views.
      *
      * @param  User $user   De databank entiteit van de opgegeven gebruiker.
      * @return View
      */
     public function create(User $user): View
     {
-        // Indien de gegeven gebruiker een leiding en of administrator is.
-        // Geef dan de beheers console weer voor leiding of administrator accounts.
-        if ($user->hasAnyRole(['leiding', 'admin'])) {
-            return view('', compact('user'));
-        }
-
-        // De gebruiker is een huurder.
         return view('tenants.lock', compact('user'));
     }
 
     /**
      * Methode om (tijdelijk) een gebruiker te blokkeren in het systeem.
-     * ---
-     * Methode word gedeeld door het huurders paneel en gebruikers paneel
      *
-     * @todo Register route
-     * @todo Build up the application views.
-     *
-     * @param  User $user           De databank entiteit van de opgegeven gebruiker.
+     * @param  Request  $request    De instantie dat alle request data benaderbaar maakt.
+     * @param  User     $user       De databank entiteit van de opgegeven gebruiker.
      * @return RedirectResponse
      */
-    public function store(User $user): RedirectResponse
+    public function store(Request $request, User $user): RedirectResponse
     {
+        // 1) Match de gebruiker zijn wachtwoord tegen de gegeven confirmatie input (wachtwoord)
+        //    Indien het wachtwoord en de confirmatie met elkaar matchen kan met verder gaan tot de ban. 
+        // 2) Registreer een permanente ban in de applicatie. Deze is alleen op te heven door een admin.
+        if ($user->validateRequest($request->confirmation) && $user->ban(['expired_at' => null])) {
 
+            // Indien de gegeven gebruiker niet dezelfde is dan de aangemelde gebruiker moet de actie gelogd worden.
+            if (! auth()->user()->is($user)) {
+                $user->logActivity("Heeft de login van {$user->name} geblokkeerd in de applicatie.");
+            }
+        }
     }
 
     /**
