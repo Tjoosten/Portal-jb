@@ -7,6 +7,10 @@
 
         <title>{{ config('app.name') }} - @yield('title') </title>
 
+        {{-- Fonts --}}
+        <link rel="dns-prefetch" href="//fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
+
         {{-- Styles --}}
         <link rel="stylesheet" href="{{ asset('css/auth.css') }}">
         <link rel="shortcut icon" type="image/png" href="{{ asset('img/favicon.ico') }}">
