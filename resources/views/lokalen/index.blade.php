@@ -33,8 +33,8 @@
     <div class="card card-body shadow-sm mb-3 py-3">
         @include ('flash::message') {{-- Flash session view partial --}}
 
-        <div class="table-responsive mb-0">
-            <table class="table table-sm @if (count($lokalen) > 0) table-hover @endif">
+        <div class="table-responsive">
+            <table class="table table-sm @if (count($lokalen) > 0) table-hover @else mb-0 @endif">
                 <thead>
                     <tr>
                         <th scope="col" class="border-top-0">#</th>
@@ -82,6 +82,9 @@
                             </td> {{-- /// NEND functie shortcuts --}}
                         </td>
                     @empty {{-- Er zijn geen lokalen gevonden in de applicatie --}}
+                        <td colspan="6">
+                            <span class="font-italic text-secondary">Er zijn geen lokalen geregistreerd in de applicatie</span>
+                        </td>
                     @endforelse {{-- /// END loop voor de lokalen van de gebruiker. --}}
                 </tbody>
             </table>

@@ -35,7 +35,6 @@
                 @error('confirmation')
             </div>
         </div>
-    
 
         <div class="form-group">
             <button type="submit" class="rounded btn btn-danger"><i class="fe fe-user-minus mr-1"></i> Bevestig</button>

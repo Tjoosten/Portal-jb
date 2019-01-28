@@ -40,7 +40,7 @@
                                 <a href="" class="nav-link">
                                     <i class="fe fe-bell"></i>
 
-                                    <span style="margin-top: -.25rem;" class="badge align-middle badge-pill badge-notifications">
+                                    <span style="margin-top: -.25rem;" class="badge ml-1 align-middle badge-pill badge-notifications">
                                         {{ Auth::user()->unreadNotifications->count() }}
                                     </span>
                                 </a>
@@ -76,13 +76,13 @@
                         </a>
                     @endif
 
-                    @if (Auth::user()->hasAnyRole('admin', 'leiding')) 
-                        <a href="" class="nav-link {{ active('calendar.*')  }}">
+                    @if (Auth::user()->hasAnyRole(['admin', 'leiding'])) 
+                        <a href="{{ route('calendar.index') }}" class="nav-link {{ active('calendar.*')  }}">
                             <i class="fe fe-calendar mr-1"></i>
                             Kalender
                         </a>
 
-                        <a href="" class="nav-link {{ active('huurders.*') }}">
+                        <a href="{{ route('tenants.index') }}" class="nav-link {{ active('tenants.*') }}">
                             <i class="fe mr-1 fe-users"></i> Huurders
                         </a>
                         
@@ -94,6 +94,10 @@
                             <i class="fe mr-1 fe-alert-triangle"></i> Werkpunten
                         </a>
                     @endif 
+
+                    <a href="{{ route('helpdesk.index.huurder') }}" class="nav-link {{ active('helpdesk.*') }}">
+                        <i class="fe mr-1 fe-help-circle"></i> Helpdesk
+                    </a>                            
                 </nav>
             </div>
 
@@ -109,7 +113,7 @@
 
                     <div class="float-right">
                         @if (Auth::user()->hasRole('huurder'))
-                            <a href="" class="link-footer">
+                            <a href="" class="link-footer mr-2">
                                 Gebruikersvoorwaarden
                             </a>
                         @endif

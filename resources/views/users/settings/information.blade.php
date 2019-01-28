@@ -19,7 +19,7 @@
                 @method('PATCH')    {{-- HTTP method spoofing --}}
                 @form(Auth::user()) {{-- Bind the data from the authenticated used to the form --}}
 
-                <h6 class="border-bottom border-gray pb-1 mb-3">Informatie instellingen</h6> 
+                <h6 class="border-bottom border-gray pb-1 mb-3">Informatie instellingen</h6>
 
                 <div class="form-row">
                     <div class="form-group col-12">

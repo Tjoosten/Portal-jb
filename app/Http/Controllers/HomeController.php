@@ -20,7 +20,7 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->only('indexFrontend');
-        $this->middleware('auth')->only('indexBackend');
+        $this->middleware(['auth', 'forbid-banned-user'])->only('indexBackend');
     }
 
     /**

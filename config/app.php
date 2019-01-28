@@ -43,6 +43,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Application Editor
+    |--------------------------------------------------------------------------
+    |
+    | Configure the editor that you want to use during the development of the 
+    | application. Available options:
+    | 
+    | sublime, textmate, emacs, macvim, phpstorm, ide, vscode, atom
+    |
+    */
+    'editor' => env('APP_EDITOR', 'vscode'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Application URL
     |--------------------------------------------------------------------------
     |

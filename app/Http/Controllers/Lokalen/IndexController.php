@@ -24,7 +24,7 @@ class IndexController extends Controller
     public function __construct() 
     {
         parent::__construct(); // Initiate the global constructor
-        $this->middleware(['auth', 'role:admin,leiding']);
+        $this->middleware(['auth', 'role:admin,leiding', 'forbid-banned-user']);
     }
 
     /**

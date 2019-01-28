@@ -2,23 +2,26 @@
 
 namespace App;
 
+use App\Models\{Helpdesk, Billing};
 use App\Traits\ActivityLog;
 use App\Repositories\UserRepository;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\{HasOne, HasMany};
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Cache;
+use Cog\Contracts\Ban\Bannable as BannableContract;
+use Cog\Laravel\Ban\Traits\Bannable;
 
 /**
  * Class User
  *
  * @package App
  */
-class User extends UserRepository
+class User extends UserRepository implements BannableContract
 {
-    use Notifiable, HasRoles, SoftDeletes, ActivityLog;
+    use Notifiable, HasRoles, SoftDeletes, ActivityLog, Bannable;
 
     /**
      * The attributes that are mass assignable.
@@ -42,8 +45,8 @@ class User extends UserRepository
     protected $hidden = ['password', 'remember_token'];
 
     /**
-     * Determine whether when the user is online or not. 
-     * 
+     * Determine whether when the user is online or not.
+     *
      * @return bool
      */
     public function isOnline(): bool
@@ -52,20 +55,40 @@ class User extends UserRepository
     }
 
     /**
-     * Method for hashing the given password in the application storage. 
-     * 
+     * Method for hashing the given password in the application storage.
+     *
      * @param  string $password The given or generated password from the application/form.
      * @return void
      */
-    public function setPasswordAttribute(string $password): void 
+    public function setPasswordAttribute(string $password): void
     {
         $this->attributes['password'] = bcrypt($password);
     }
 
     /**
+     * Data relatie voor alle helpdesk tickets dat zijn aangemaakt door de gegeven gebruiker.
+     *
+     * @return HasMany
+     */
+    public function questions(): HasMany
+    {
+        return $this->hasMany(Helpdesk::class, 'created_by');
+    }
+
+    /**
+     * Data relatie voor de facturatie gegevens van de gebruikers.
+     *
+     * @return HasMany
+     */
+    public function billingInformation(): HasOne
+    {
+        return $this->HasOne(Billing::class);
+    }
+
+    /**
      * Get all the users that are registered on the current day.
      *
-     * @param  Builder $query The Eloquent ORm query builder instance. 
+     * @param  Builder $query The Eloquent ORm query builder instance.
      * @return Builder
      */
     public function scopeRegisteredToday($query): Builder
