@@ -19,14 +19,17 @@
         </div> {{-- /// END sidebar --}}
 
         <div class="col-md-9"> {{-- Page content --}}
-            <form method="POST" action="" class="card card-body shadow-sm mb-3 py-3">
+            <form method="POST" action="{{ route('logins.lock.store', $user) }}" class="card card-body shadow-sm mb-3 py-3">
                 <h6 class="border-bottom border-gray pb-1 mb-3">
                     @if ($user->hasRole('huurder'))
                         Deactivatie van een huurder zijn account
                     @else {{-- Het opgegeven account is een admin identiteit --}}
-                        Deactivatie van een administrator zijn account
+                    Deactivatie van een administrator zijn account
                     @endif
                 </h6>
+
+                @csrf {{-- Form field protection --}}
+                @include ('flash::message') {{-- Flash session view partial --}}
 
                 <p class="card-text text-danger">
                     <i class="fe fe-alert-triangle mr-1"></i> Bij het blokkeren van <strong>{{ $user->name }}</strong>
@@ -44,7 +47,8 @@
 
                 <div class="form-row">
                     <div class="form-group col-md-4" style="margin-bottom: 0.5rem;">
-                        <input type="password" name="confirmation" value="" id="inputEmail4" placeholder="Uw wachtwoord ter controle" class="form-control ">
+                        <input type="password" name="confirmation" value="" id="inputEmail4" placeholder="Uw wachtwoord ter controle" class="form-control @error('confirmation', 'is-invalid')">
+                        @error('confirmation')
                     </div>
 
                     <div class="form-group col-md-12">

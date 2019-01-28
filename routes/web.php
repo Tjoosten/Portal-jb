@@ -42,6 +42,8 @@ Route::get('helpdesk/ticket/{ticket}/{status}', 'Helpdesk\SharedController@statu
 
 // Login lock routes
 Route::get('/users/lock/{user}', 'Users\LockController@create')->name('logins.lock');
+Route::post('/users/lock/{user}', 'Users\LockController@store')->name('logins.lock.store');
+Route::match(['get', 'delete'], '/users/unlock/{user}', 'Users\LockController@destroy')->name('logins.unlock');
 
 // Calendar Routes
 Route::get('calendar', 'Lease\CalendarController@index')->name('calendar.index');

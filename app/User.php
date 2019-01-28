@@ -19,7 +19,7 @@ use Cog\Laravel\Ban\Traits\Bannable;
  *
  * @package App
  */
-class User extends UserRepository
+class User extends UserRepository implements BannableContract
 {
     use Notifiable, HasRoles, SoftDeletes, ActivityLog, Bannable;
 

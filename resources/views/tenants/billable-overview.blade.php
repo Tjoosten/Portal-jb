@@ -9,7 +9,13 @@
         </div>
 
         <div class="page-options d-flex">
-            <a href="{{ route('tenants.index') }}" class="btn btn-sgv-green shadow-sm mr-2">
+            @if (is_null($user->password)) {{-- Gebruiker heeft geen login in de applicatie --}}
+                <a href="" class="btn btn-white shadow-sm mr-1">
+                    <i class="fe mr-1 fe-user-plus"></i> Login aanmaken
+                </a>
+            @endif
+
+            <a href="{{ route('tenants.index') }}" class="btn btn-sgv-green shadow-sm">
                 <i class="fe fe-list mr-1"></i> Overzicht
             </a>
         </div>

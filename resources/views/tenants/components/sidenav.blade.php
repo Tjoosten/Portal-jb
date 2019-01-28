@@ -26,6 +26,10 @@
             <a href="{{ route('logins.lock', $tenant) }}" class="list-group-item list-group-item-action {{ active('logins.lock') }}">
                 <i class="fe fe-lock mr-2"></i> Login blokkeren
             </a>
+        @else {{-- De huurder zijn login is op non actief gezet --}}
+            <a href="" class="list-group-item list-group-item-action">
+                <i class="fe fe-unlock mr-2"></i> Login deblokkeren
+            </a>
         @endif
     @endif
 

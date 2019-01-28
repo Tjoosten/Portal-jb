@@ -52,6 +52,11 @@ flex-direction: column;
   @include badge-variant($sgv-green);
 }
 
+.btn-white{
+  @include button-variant(#fff,  #fff);
+  white-space: nowrap;
+}
+
 .btn-sgv-green {
   @include button-variant($sgv-green-dark, $sgv-green-dark);
   white-space: nowrap;
