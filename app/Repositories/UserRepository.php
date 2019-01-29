@@ -39,6 +39,23 @@ class UserRepository extends Authenticatable
     }
 
     /**
+     * Methode voor de gebruikers blokkade te verwijderen in de applicatie.
+     *
+     * @throws \Exception instantie van ModelNotFoundException wanneer geen gebruikers entiteit gevonden
+     *
+     * @param  string $password
+     * @return void
+     */
+    public function removeLock(string $password): void
+    {
+        if ($this->validateRequest($password)) {
+            $this->unban();
+            $this->logActivity("Heeft blokkering van {$this->name} opgeheven in de applicatie", "Admins & Leiding");
+            (new FlashRepository())->info("De blokkering voor {$this->name} is opgeheven in de applicatie.");
+        }
+    }
+
+    /**
      * Confirm that the value from the confirmation in put is the same as the auth user his password.
      * 
      * @param  string $password The user given confirmation from the form. 

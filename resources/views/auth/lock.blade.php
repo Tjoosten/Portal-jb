@@ -21,11 +21,7 @@
         <div class="col-md-9"> {{-- Page content --}}
             <form method="POST" action="{{ route('logins.lock.store', $user) }}" class="card card-body shadow-sm mb-3 py-3">
                 <h6 class="border-bottom border-gray pb-1 mb-3">
-                    @if ($user->hasRole('huurder'))
-                        Deactivatie van een huurder zijn account
-                    @else {{-- Het opgegeven account is een admin identiteit --}}
-                    Deactivatie van een administrator zijn account
-                    @endif
+                    De activatie van een gebruikers account
                 </h6>
 
                 @csrf {{-- Form field protection --}}

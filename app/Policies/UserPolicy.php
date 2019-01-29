@@ -27,6 +27,18 @@ class UserPolicy
     }
 
     /**
+     * Determine whether the user is permitted to remove a user lock in the application. 
+     * 
+     * @param  User $authUser   The authenticated user entity.
+     * @param  User $userModel  The user entity from the given user
+     * @return bool
+     */
+    public function removeLock(User $authUser, User $userModel): bool 
+    {
+        return $authUser->hasRole('admin') && $userModel->isBanned();
+    }
+
+    /**
      * Determine whether the authenticated user can create a new user of not.
      *
      * @param  User $authUser   The authenticated user entity

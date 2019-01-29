@@ -34,7 +34,7 @@ class LockController extends Controller
      */
     public function create(User $user): View
     {
-        return view('tenants.lock', compact('user'));
+        return view('auth.lock', compact('user'));
     }
 
     /**
@@ -58,24 +58,31 @@ class LockController extends Controller
             $this->flashMessage->success("De account van {$user->name} is met success geblokkeerd.")->important();
         }
 
-        return redirect()->route('logins.lock', $user);
+        return redirect()->route('home');
     }
 
     /**
      * Methode voor het (tijdelijk) blokkeren van een gebruiker in de applicatie.
      *
-     * @todo Register route
-     * @todo Build up the application view.
-     * @todo Implement undo method.
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @throws \Illuminate\Validation\ValidationException
      *
-     * @param  Request $request     De instantie dat verantwoordelijk is voor de request informatie.
-     * @param  User    $user        De databank entiteit van de opgegeven gebruiker.
+     * @param  Request $request De instantie dat verantwoordelijk is voor de request informatie.
+     * @param  User    $user    De databank entiteit van de opgegeven gebruiker.
      * @return View|RedirectResponse
      */
-    public function delete(Request $request, User $user)
+    public function destroy(Request $request, User $user)
     {
-        if ($request->isMethod('GET')) {
+        $this->authorize('remove-lock', $user);
 
+        if ($request->isMethod('GET')) {
+            return view('auth.unlock', compact('user'));
         }
+
+        // Gegeven method is van het PATCH type dus ga over tot de effectieve deblokkering 
+        $this->validate($request, ['confirmation' => ['required', 'string', 'max:191']]); 
+        $user->removeUserLock($request->confirmation); // Registreer de gebruiker als actief in het systeem.
+
+        return redirect()->route('home');
     }
 }

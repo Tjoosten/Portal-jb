@@ -4,11 +4,11 @@
     </a>
 
     <a href="{{ route('tenants.show', $tenant) }}" class="list-group-item list-group-item-action {{ active('tenants.show') }}">
-        <i class="fe fe-info mr-2"></i> Algemene gegevens
+        <i class="fe text-secondary fe-info mr-2"></i> Algemene gegevens
     </a>
 
     <a href="{{ route('tenants.billing', $tenant) }}" class="list-group-item list-group-item-action {{ active('tenants.billing') }}">
-        <i class="fe fe-info mr-2"></i> Facturatie gegevens
+        <i class="fe text-secondary fe-info mr-2"></i> Facturatie gegevens
     </a>
 </div>
 
@@ -24,16 +24,16 @@
     @else {{-- Gebruiker kan inloggen --}}
         @if ($tenant->isNotBanned()) {{-- Huurder login is actief --}}
             <a href="{{ route('logins.lock', $tenant) }}" class="list-group-item list-group-item-action {{ active('logins.lock') }}">
-                <i class="fe fe-lock mr-2"></i> Login blokkeren
+                <i class="fe text-secondary fe-lock mr-2"></i> Login blokkeren
             </a>
         @else {{-- De huurder zijn login is op non actief gezet --}}
-            <a href="" class="list-group-item list-group-item-action">
-                <i class="fe fe-unlock mr-2"></i> Login deblokkeren
+            <a href="{{ route('logins.unlock', $tenant) }}" class="list-group-item list-group-item-action">
+                <i class="fe text-secondary fe-unlock mr-2"></i> Login deblokkeren
             </a>
         @endif
     @endif
 
-    <a href="" class="list-group-item list-group-item-action">
+    <a href="mailto:{{ $tenant->email }}" class="list-group-item list-group-item-action">
         <i class="fe fe-mail mr-2"></i> E-mail huurder
     </a>
 </div>
