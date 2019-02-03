@@ -50,7 +50,7 @@
                                     <span class="badge badge-danger">Niet geregistreerd</span>
                                 @else {{-- tenant login is activated --}}
                                     @if ($tenant->isBanned()) {{-- Login for tenant is disabled by an admin --}}
-                                        <span class="badge badge-warning">Non actief</span> 
+                                        <span class="badge badge-warning"><i class="fe fe-lock mr-1"></i> Non actief</span>
                                     @else {{-- Tenant login is activated --}}
                                         <span class="badge badge-success">Actief</span>
                                     @endif

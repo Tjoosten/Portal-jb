@@ -90,7 +90,7 @@
                             <i class="fe fe-list mr-1"></i> Lokalen
                         </a>
 
-                        <a href="" class="nav-link {{ active('werkpunten.*') }}">
+                        <a href="{{ route('werkpunten.index') }}" class="nav-link {{ active('werkpunten.*') }}">
                             <i class="fe mr-1 fe-alert-triangle"></i> Werkpunten
                         </a>
                     @endif 

@@ -40,6 +40,17 @@ class WerkpuntenController extends Controller
         dd('werkpunten index');
     }
 
+
+    public function lokaal(Lokalen $lokaal, string $status): View
+    {
+        switch ($status) {
+            case 'gesloten': $werkpunten = $lokaal->getWerkpuntenOpen(false); break;
+            default:         $werkpunten = $lokaal->getWerkpuntenOpen(true);
+        }
+
+        return view('lokalen.werkpunten.overview-lokaal', compact('werkpunten'));
+    }
+
     /**
      * Method voor de weergave van een nieuw werkpuntje. 
      * 

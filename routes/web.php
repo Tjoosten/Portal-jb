@@ -19,7 +19,8 @@ Route::get('/', 'HomeController@indexFrontend')->name('/');
 Route::get('/home', 'HomeController@indexBackend')->name('home');
 
 // Werkpunten routes
-Route::get('/werkpunten/{lokaal}/index', 'Lokalen\WerkpuntenController@index')->name('werkpunten.index');
+Route::get('/werkpunten/index', 'Lokalen\WerkpuntenController@index')->name('werkpunten.index');
+Route::get('{lokaal}/werkpunten/{status}', 'Lokalen\WerkpuntenController@lokaal')->name('werkpunten.lokaal');
 Route::get('/werkpunten/create', 'Lokalen\WerkpuntenController@create')->name('werkpunten.create');
 Route::post('/werkpunten/create', 'Lokalen\WerkpuntenController@store')->name('werkpunten.store');
 
@@ -28,6 +29,7 @@ Route::get('/lokalen', 'Lokalen\IndexController@index')->name('lokalen.index');
 Route::get('/lokalen/nieuw', 'Lokalen\IndexController@create')->name('lokalen.create');
 Route::post('/lokalen/nieuw', 'Lokalen\IndexController@store')->name('lokalen.store');
 Route::get('/lokalen/wijzig/{lokaal}', 'Lokalen\IndexController@edit')->name('lokalen.edit');
+Route::patch('/lokalen/wijzig/{lokaal}', 'Lokalen\IndexController@update')->name('lokalen.update');
 Route::match(['get', 'delete'], '/lokalen/verwijder/{lokaal}', 'Lokalen\IndexController@destroy')->name('lokalen.delete');
 
 // Activity log routes

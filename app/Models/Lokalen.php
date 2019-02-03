@@ -2,18 +2,20 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Repositories\LokaalRepository;
+use App\Traits\ActivityLog;
 use Illuminate\Database\Eloquent\Relations\{BelongsTo, HasMany};
 use App\User;
-use Illuminate\Database\Eloquent\Builder;
 
 /**
  * Class Lokalen
  * 
  * @package App\Models
  */
-class Lokalen extends Model
+class Lokalen extends LokaalRepository
 {
+    use ActivityLog;
+
     /**
      * Attributes that are mass-assignable to the database table. 
      * 
@@ -39,6 +41,6 @@ class Lokalen extends Model
     public function responsible(): BelongsTo
     {
         return $this->belongsTo(User::class, 'verantwoordelijke')
-            ->withDefault(['name' => '<span class="text-secoondary">-</span>']);
+            ->withDefault(['name' => '<span class="text-secondary">-</span>']);
     }
 }

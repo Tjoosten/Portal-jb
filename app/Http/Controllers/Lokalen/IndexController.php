@@ -45,7 +45,7 @@ class IndexController extends Controller
      */
     public function create(): View 
     {
-        $admins = User::orderBy('name', 'asc')->pluck('name', 'id');
+        $admins = User::role(['leiding', 'admin'])->orderBy('name', 'asc')->pluck('name', 'id');
         $capacityTypes  = ['Slaapplekken' => 'Slaapplekken', 'Personen' => 'Personen']; // Capacity types. 
 
         return view('lokalen.create', compact('admins', 'capacityTypes'));
@@ -72,26 +72,52 @@ class IndexController extends Controller
 
     /**
      * Method vo)or de weergave van de pagina voor het wijzigen van gegevens. 
-     * 
-     * @todo Opbouwen van de weergave
-     * 
+     *
      * @param  Lokalen $lokaal De databank entiteit van het lokaal. 
      * @return View
      */
     public function edit(Lokalen $lokaal): View 
     {
-        return view('lokalen.edit', compact('lokaal'));
+        $admins = User::role(['leiding', 'admin'])->select(['id', 'name'])->get();
+        $capacityTypes  = ['Slaapplekken' => 'Slaapplekken', 'Personen' => 'Personen']; // Capacity types.
+
+        return view('lokalen.edit', compact('lokaal', 'admins', 'capacityTypes'));
     }
 
     /**
-     * Methode voor het verwijderen van een lokaal in het systeem. 
-     * 
-     * @param  Lokalen $lokaal De databank entity van het lokaal. 
-     * @return RedirectResponse 
+     * Methode voor het aanpassen van een lokaal in de databank opslag.
+     *
+     * @param  InformationValidator $input   De form request instantie dat de validatie verzorgd.
+     * @param  Lokalen              $lokaal  De databank entiteit van het gegeven lokaal.
+     * @return RedirectResponse
+     */
+    public function update(InformationValidator $input, Lokalen $lokaal): RedirectResponse
+    {
+        if ($lokaal->update($input->except('verantwoordelijke'))) {
+            if ($input->has('verantwoordelijke')) {
+                $lokaal->responsible()->associate($input->verantwoordelijke)->save();
+            }
+
+            $lokaal->logActivity("Heeft de informatie van een lokaal ({$lokaal->name}) gewijzigd", 'Lokalen');
+            $this->flashMessage->success("De gegevens van het lokaal zijn aangepast.");
+        }
+
+        return redirect()->route('lokalen.edit', $lokaal);
+    }
+
+    /**
+     * Methode voor het verwijderen van een lokaal in het systeem.
+     *
+     * @throws \Exception
+     *
+     * @param  Lokalen $lokaal De databank entity van het lokaal.
+     * @return RedirectResponse
      */
     public function destroy(Lokalen $lokaal): RedirectResponse
     {
         if ($lokaal->delete()) {
+            $lokaal->logActivity("Heeft een lokaal ({$lokaal->name}) verwijderd in de applicatie", 'Lokalen');
+
             $flashText = "Het lokaal <strong>{$lokaal->name}</strong> + de werkpunten ervan zijn verwijderd.";
             $this->flashMessage->success($flashText)->important();
         }
