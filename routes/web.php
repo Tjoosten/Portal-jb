@@ -27,6 +27,7 @@ Route::post('/werkpunten/create', 'Lokalen\WerkpuntenController@store')->name('w
 Route::get('/lokalen', 'Lokalen\IndexController@index')->name('lokalen.index');
 Route::get('/lokalen/nieuw', 'Lokalen\IndexController@create')->name('lokalen.create');
 Route::post('/lokalen/nieuw', 'Lokalen\IndexController@store')->name('lokalen.store');
+Route::get('/lokalen/wijzig/{lokaal}', 'Lokalen\IndexController@edit')->name('lokalen.edit');
 Route::match(['get', 'delete'], '/lokalen/verwijder/{lokaal}', 'Lokalen\IndexController@destroy')->name('lokalen.delete');
 
 // Activity log routes

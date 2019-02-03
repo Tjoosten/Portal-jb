@@ -71,6 +71,19 @@ class IndexController extends Controller
     }
 
     /**
+     * Method vo)or de weergave van de pagina voor het wijzigen van gegevens. 
+     * 
+     * @todo Opbouwen van de weergave
+     * 
+     * @param  Lokalen $lokaal De databank entiteit van het lokaal. 
+     * @return View
+     */
+    public function edit(Lokalen $lokaal): View 
+    {
+        return view('lokalen.edit', compact('lokaal'));
+    }
+
+    /**
      * Methode voor het verwijderen van een lokaal in het systeem. 
      * 
      * @param  Lokalen $lokaal De databank entity van het lokaal. 

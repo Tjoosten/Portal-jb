@@ -34,7 +34,7 @@
         @include ('flash::message') {{-- Flash session view partial --}}
 
         <div class="table-responsive">
-            <table class="table table-sm @if (count($lokalen) > 0) table-hover @else mb-0 @endif">
+            <table class="table table-sm @if (count($lokalen) > 0) table-hover @endif mb-0">
                 <thead>
                     <tr>
                         <th scope="col" class="border-top-0">#</th>
@@ -71,13 +71,15 @@
                                         <i class="fe fe-sliders"></i>
                                     </a>
 
-                                    <a href="" class="mr-1 no-underline text-secondary">
+                                    <a href="{{ route('lokalen.edit', $lokaal) }}" class="mr-1 no-underline text-secondary">
                                         <i class="fe fe-edit-2"></i>
                                     </a>
 
-                                    <a href="{{ route('lokalen.delete', $lokaal) }}" class="no-underline text-danger">
-                                        <i class="fe fe-x-circle"></i>
-                                    </a>
+                                    @if (Auth::user()->hasRole('admin'))
+                                        <a href="{{ route('lokalen.delete', $lokaal) }}" class="no-underline text-danger">
+                                            <i class="fe fe-x-circle"></i>
+                                        </a>
+                                    @endif
                                 </span>
                             </td> {{-- /// NEND functie shortcuts --}}
                         </td>
