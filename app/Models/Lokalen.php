@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
+use App\Traits\ActivityLog;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\{BelongsTo, HasMany};
 use App\User;
-use Illuminate\Database\Eloquent\Builder;
 
 /**
  * Class Lokalen
@@ -14,6 +14,8 @@ use Illuminate\Database\Eloquent\Builder;
  */
 class Lokalen extends Model
 {
+    use ActivityLog;
+
     /**
      * Attributes that are mass-assignable to the database table. 
      * 

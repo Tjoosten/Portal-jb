@@ -72,9 +72,7 @@ class IndexController extends Controller
 
     /**
      * Method vo)or de weergave van de pagina voor het wijzigen van gegevens. 
-     * 
-     * @todo Opbouwen van de weergave
-     * 
+     *
      * @param  Lokalen $lokaal De databank entiteit van het lokaal. 
      * @return View
      */
@@ -100,6 +98,7 @@ class IndexController extends Controller
                 $lokaal->responsible()->associate($input->verantwoordelijke)->save();
             }
 
+            $lokaal->logActivity("Heeft de informatie van een lokaal ({$lokaal->name}) gewijzigd", 'Lokalen');
             $this->flashMessage->success("De gegevens van het lokaal zijn aangepast.");
         }
 
@@ -117,6 +116,8 @@ class IndexController extends Controller
     public function destroy(Lokalen $lokaal): RedirectResponse
     {
         if ($lokaal->delete()) {
+            $lokaal->logActivity("Heeft een lokaal ({$lokaal->name}) verwijderd in de applicatie", 'Lokalen');
+
             $flashText = "Het lokaal <strong>{$lokaal->name}</strong> + de werkpunten ervan zijn verwijderd.";
             $this->flashMessage->success($flashText)->important();
         }
