@@ -41,6 +41,6 @@ class Lokalen extends Model
     public function responsible(): BelongsTo
     {
         return $this->belongsTo(User::class, 'verantwoordelijke')
-            ->withDefault(['name' => '<span class="text-secoondary">-</span>']);
+            ->withDefault(['name' => '<span class="text-secondary">-</span>']);
     }
 }
