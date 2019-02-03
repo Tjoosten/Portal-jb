@@ -54,13 +54,13 @@
                             <td>{{ $lokaal->capacity }} {{ $lokaal->capacity_type}}</td>
 
                             <td> {{-- Werkpunten indicator --}}
-                                <a href="{{ route('werkpunten.index', ['lokaal' => $lokaal, 'status' => 'open']) }}" class="text-success no-underline">
+                                <a href="{{ route('werkpunten.lokaal', ['lokaal' => $lokaal, 'status' => 'open']) }}" class="text-success no-underline">
                                     {{ $lokaal->werkpunten()->isOpen(true)->count() }} Open
                                 </a>
 
                                 <span class="text-secondary px-1">/</span>
 
-                                <a href="{{ route('werkpunten.index', ['lokaal' => $lokaal, 'status' => 'gesloten']) }}" class="text-danger no-underline">
+                                <a href="{{ route('werkpunten.lokaal', ['lokaal' => $lokaal, 'status' => 'gesloten']) }}" class="text-danger no-underline">
                                     {{ $lokaal->werkpunten()->isOpen(false)->count() }} Gesloten
                                 </a>
                             </td> {{-- /// Einde werkpunten indicator --}}

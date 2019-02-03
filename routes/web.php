@@ -19,7 +19,8 @@ Route::get('/', 'HomeController@indexFrontend')->name('/');
 Route::get('/home', 'HomeController@indexBackend')->name('home');
 
 // Werkpunten routes
-Route::get('/werkpunten/{lokaal}/index', 'Lokalen\WerkpuntenController@index')->name('werkpunten.index');
+Route::get('/werkpunten/index', 'Lokalen\WerkpuntenController@index')->name('werkpunten.index');
+Route::get('{lokaal}/werkpunten/{status}', 'Lokalen\WerkpuntenController@lokaal')->name('werkpunten.lokaal');
 Route::get('/werkpunten/create', 'Lokalen\WerkpuntenController@create')->name('werkpunten.create');
 Route::post('/werkpunten/create', 'Lokalen\WerkpuntenController@store')->name('werkpunten.store');
 

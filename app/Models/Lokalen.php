@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
+use App\Repositories\LokaalRepository;
 use App\Traits\ActivityLog;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\{BelongsTo, HasMany};
 use App\User;
 
@@ -12,7 +12,7 @@ use App\User;
  * 
  * @package App\Models
  */
-class Lokalen extends Model
+class Lokalen extends LokaalRepository
 {
     use ActivityLog;
 
