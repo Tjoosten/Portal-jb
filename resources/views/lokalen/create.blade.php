@@ -39,7 +39,7 @@
                              @options($capacityTypes, 'capacity_type')
                         </select>
 
-                        @error('capcity_type')
+                        @error('capacity_type')
                     </div>
                 </div>
             </div>
