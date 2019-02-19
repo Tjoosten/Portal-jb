@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Repositories\CalendarRepository;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * 
  * @package App\Models
  */
-class Lease extends Model
+class Lease extends CalendarRepository
 {
     /**
      * Mass-assign velden voor de databank tabel. 
@@ -18,6 +18,8 @@ class Lease extends Model
      * @var array
      */
     protected $fillable = [];
+
+    protected $dates = ['start_datum', 'eind_datum'];
 
     /**
      * Data relatie voor de huurder van het domein. 

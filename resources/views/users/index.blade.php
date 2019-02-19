@@ -87,6 +87,16 @@
                                         </a>
                                     @endif
 
+                                    @if ($user->isBanned())
+                                        <a href="" class="text-secondary no-underline">
+                                            <i class="mr-1 fe fe-unlock"></i>
+                                        </a>
+                                    @else
+                                        <a href="" class="text-secondary no-underline">
+                                            <i class="mr-1 fe fe-lock"></i>
+                                        </a>
+                                    @endif
+
                                     @if (! $user->trashed()) 
                                         <a href="{{ route('admins.destroy', $user) }}" class="text-danger no-underline">
                                             <i class="mr-1 fe fe-user-x"></i>

@@ -35,4 +35,15 @@ class CalendarController extends Controller
     {
         return view('calendar.index', ['leases' => $lease->simplePaginate()]);
     }
+
+    /**
+     * Method for displaying the create view for an new lease.
+     *
+     * @return View
+     */
+    public function create(): View
+    {
+        $statusses = (new Lease)->getLeaseStatusses();
+        return view('calendar.create', compact('statusses'));
+    }
 }
