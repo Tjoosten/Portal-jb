@@ -60,18 +60,43 @@ class CalendarController extends Controller
     public function store(CreateValidator $input): RedirectResponse
     {
         if ($lease = Lease::create($input->all())) {
-            $lease->logActivity("Heeft een verhuring toegevoegd in de applicatie.");
+            $lease->logActivity("Heeft een verhuring toegevoegd in de applicatie.", 'Verhuringen');
 
-            try {
+            try { // To find the user or tenant in the application.
                 $tenant = User::whereEmail($input->email)->firstOrFail();
             }
 
+            // There is no tenant found so we create the tenant as a new one in the application.
             catch (ModelNotFoundException $exception) {
                 $input->merge(['name' => "{$input->voornaam} {$input->achternaam}"]);
                 $tenant = User::create($input->all())->assignRole('huurder');
             }
 
+            // Attach the tenant to the inserted lease.
             $lease->tenant()->associate($tenant)->save();
+        }
+
+        return redirect()->route('calendar.index');
+    }
+
+    /**
+     * Method for deleting a lease in the application.
+     *
+     * @throws \Exception When no record is found in the application.
+     *
+     * @param Request $request The instance that holds all the request information.
+     * @param Lease   $lease   The database resource from the lease.
+     * @return \Illuminate\Contracts\View\Factory|RedirectResponse|\Illuminate\View\View
+     */
+    public function destroy(Request $request, Lease $lease)
+    {
+        if ($request->isMethod('GET')) {
+            return view('calendar.delete', compact('lease'));
+        }
+
+        if ($request->isMethod('DELETE') && $lease->delete()) {
+            $this->flashMessage->success('De verhuring is verwijderd in de applicatie.');
+            $lease->logActivity('Heeft een verhuring verwijderd in de applicatie.', 'Verhuringen');
         }
 
         return redirect()->route('calendar.index');

@@ -6,7 +6,7 @@
         <div class="page-subtitle">Verhuring toevoegen</div>
 
         <div class="page-options d-flex">
-            <a href="" class="btn tw-rounded btn-sgv-green">
+            <a href="{{ route('calendar.index') }}" class="btn tw-rounded btn-sgv-green">
                 <i class="fe fe-list mr-1"></i> Overzicht
             </a>
         </div>

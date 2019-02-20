@@ -31,7 +31,7 @@
                                 <i class="fe fe-eye mr-1"></i>
                             </a>
 
-                            <a href="" class="text-decoration-none text-danger">
+                            <a href="{{ route('calendar.delete', $lease) }}" class="text-decoration-none text-danger">
                                 <i class="fe fe-x-circle mr-1"></i>
                             </a>
                         </span>
