@@ -51,6 +51,7 @@ Route::match(['get', 'delete'], '/users/unlock/{user}', 'Users\LockController@de
 // Calendar Routes
 Route::get('calendar', 'Lease\CalendarController@index')->name('calendar.index');
 Route::get('calendar/create', 'Lease\CalendarController@create')->name('calendar.create');
+Route::post('calendar/create', 'Lease\CalendarController@store')->name('calendar.store');
 
 // Tenant billing information routes
 Route::patch('huurders/facturatie/{user}', 'Lease\Tenants\BillableController@store')->name('tenants.billing.store');

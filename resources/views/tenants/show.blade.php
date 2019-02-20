@@ -9,6 +9,16 @@
         </div>
 
         <div class="page-options d-flex">
+            @if (is_null($tenant->password)) {{-- Gebruiker heeft geen login in de applicatie --}}
+                <a href="" class="btn btn-white shadow-sm mr-1">
+                    <i class="fe mr-1 fe-user-plus"></i> Login aanmaken
+                </a>
+            @else
+                <a href="" class="btn btn-danger shadow-sm mr-1">
+                    <i class="fe mr-1 fe-x-circle"></i> Verwijder login
+                </a>
+            @endif
+
             <a href="" class="btn btn-sgv-green shadow-sm mr-2">
                 <i class="fe fe-list mr-1"></i> Overzicht
             </a>
@@ -30,17 +40,17 @@
                 <div class="form-row"> {{-- Tenant data --}}
                     <div class="form-group col-6">
                         <label for="inputName">Naam</label>
-                        <input class="form-control" id="inputName" type="text" value="{{ $tenant->name }}" readonly>
+                        <input class="form-control" id="inputName" type="text" value="{{ $tenant->name }}">
                     </div>
 
                     <div class="form-group col-6">
                         <label for="inputEmail">E-mail adres</label>
-                        <input class="form-control" id="inputEmail" type="text" value="{{ $tenant->email }}" readonly>
+                        <input class="form-control" id="inputEmail" type="text" value="{{ $tenant->email }}">
                     </div>
 
                     <div class="form-group col-6">
                         <label for="inputTelNumber">Telefoon nummer</label>
-                        <input class="form-control" id="inputTelNumber" type="text" value="{{ $tenant->telephone_number }}" readonly>
+                        <input class="form-control" id="inputTelNumber" type="text" value="{{ $tenant->telephone_number }}">
                     </div>
 
                     <div class="form-group col-6">

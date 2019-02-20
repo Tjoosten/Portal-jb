@@ -18,10 +18,12 @@ class CreateLeasesTable extends Migration
     {
         Schema::create('leases', function (Blueprint $table): void {
             $table->increments('id');
-            $table->unsignedInteger('tenant_id');
+            $table->unsignedInteger('tenant_id')->nullable();
             $table->foreign('tenant_id')->references('id')->on('users')->onDelete('cascade');
-            $table->timestamp('start_datum')->nullable()->default(null);
-            $table->timestamp('eind_datum')->nullable()->default(null);
+            $table->integer('aantal_personen');
+            $table->string('status')->default('Nieuwe aanvraag');
+            $table->date('start_datum')->nullable()->default(null)->comment('Datum formaat: Y-m-d');
+            $table->date('eind_datum')->nullable()->default(null)->comment('Datum formaat: Y-m-d');
             $table->timestamps();
         });
     }

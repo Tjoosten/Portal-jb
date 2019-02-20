@@ -13,7 +13,7 @@
     </div>
     </div>
 
-    <form action="" method="POST" class="card card-body shadow-sm mb-3 py-3">
+    <form action="{{ route('calendar.store') }}" method="POST" class="card card-body shadow-sm mb-3 py-3">
         @csrf {{-- Form field protection --}}
 
         <h6 class="border-bottom border-gray pb-1 mb-3">Verhuring gegevens</h6>
@@ -49,7 +49,11 @@
             </div>
         </div>
 
-        <h6 class="border-bottom border-gray pb-1 mb-3">Huurder gegevens</h6>
+        <h6 class="border-bottom border-gray pb-1 mb-2">Huurder gegevens</h6>
+        <small class="text-secondary mb-2">
+            <i class="fe fe-info mr-1 font-weight-bold"></i>
+            Als er een huurder met het gegeven email adres word gevonden word deze data gebruikt.
+        </small>
 
         <div class="form-row">
             <div class="form-group col-4">

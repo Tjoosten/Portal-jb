@@ -18,16 +18,6 @@
     </div>
 
     <div class="card card-body shadow-sm mb-3 py-3">
-        <table class="table table-sm @if(count($leases) > 0) table-hover @endif mb-1">
-            <thead>
-                <tr>
-                    <th scope="col" class="border-top-0">#</th>
-                    <th scope="col" class="border-top-0">Periode</th>
-                    <th scope="col" class="border-top-0">Status</th>
-                    <th scope="col" class="border-top-0">Groep/Persoon</th>
-                    <th scope="col" class="border-top-0">&nbsp;</th> {{-- Col specified for the functions --}}
-                </tr>
-            </thead>
-        </table>
+        @include ('calendar.components.overview-table', ['leases' => $leases])
     </div>
 @endsection
