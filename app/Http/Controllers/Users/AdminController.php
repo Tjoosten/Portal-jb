@@ -141,6 +141,13 @@ class AdminController extends Controller
         return view('users.show', compact('user'));
     }
 
+    /**
+     * Methode voor het aanpassen van de admin/leiding/webmaster in de applicatie. 
+     * 
+     * @param  InformationValidator $input  The form request class that handles all the validation logic.
+     * @param  User                 $user   The resource entity from the given user
+     * @return RedirectResponse
+     */
     public function update(InformationValidator $input, User $user): RedirectResponse
     {
         if ($user->update($input->all())) {
