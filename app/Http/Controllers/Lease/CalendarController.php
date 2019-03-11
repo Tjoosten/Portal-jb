@@ -79,6 +79,11 @@ class CalendarController extends Controller
         return redirect()->route('calendar.index');
     }
 
+    public function show(Lease $lease): View
+    {
+        return view('calendar.show', compact('lease'));
+    }
+
     /**
      * Method for deleting a lease in the application.
      *

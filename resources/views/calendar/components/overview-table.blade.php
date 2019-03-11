@@ -27,7 +27,7 @@
 
                     <td> {{-- Option columns --}}
                         <span class="float-right">
-                            <a href="" class="text-decoration-none text-secondary">
+                            <a href="{{ route('calendar.show', $lease) }}" class="text-decoration-none text-secondary">
                                 <i class="fe fe-eye mr-1"></i>
                             </a>
 
