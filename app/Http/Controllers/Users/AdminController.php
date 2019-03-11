@@ -11,6 +11,7 @@ use Spatie\Permission\Models\Role;
 use App\User;
 use App\Notifications\Users\CreatedMail;
 use App\Http\Requests\Users\CreateValidator;
+use App\Http\Requests\Users\Settings\InformationValidator;
 
 /**
  * Class AdminController
@@ -138,6 +139,16 @@ class AdminController extends Controller
     public function show(User $user): View
     {
         return view('users.show', compact('user'));
+    }
+
+    public function update(InformationValidator $input, User $user): RedirectResponse
+    {
+        if ($user->update($input->all())) {
+            $this->flashMessage->success("De gegevens van {$user->name} zijn aangepast in de applicatie")->important();
+            $this->auth->user()->logActivity("Heeft de gegevens van de gebruiker {$user->name} aangepast in de applicatie.");
+        }
+
+        return redirect()->route('admins.show', $user);
     }
 
     /**
