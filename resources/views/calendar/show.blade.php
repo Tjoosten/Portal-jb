@@ -27,7 +27,17 @@
 
                 <div class="form-row">
                     <div class="form-group col-6">
-                    
+                        <label for="inputStartDate">Start datum</label>
+                        <input type="date" id="inputStartDate" class="form-control" readonly value="{{ $lease->start_datum->format('d-m-Y') }}">
+                    </div>
+
+                    <div class="form-group col-6">
+                        <label for="inputEndDate">Eind datum</label>
+                        <input type="date" id="inputEndDate" class="form-control" readonly value="{{ $lease->eind_datum->format('d-m-Y') }}">
+                    </div>
+
+                    <div class="form-group col-6">
+                        <label for="inputPersonen">Aantal personen <span class="text-danger">*</span></label>
                     </div>
                 </div>
             </form>
