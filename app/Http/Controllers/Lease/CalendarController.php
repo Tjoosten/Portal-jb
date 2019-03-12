@@ -87,7 +87,11 @@ class CalendarController extends Controller
      */
     public function show(Lease $lease): View
     {
-        return view('calendar.show', compact('lease'));
+        $statusses     = $lease->getLeaseStatusses();
+        $cantEdit      = $this->auth->user()->cannot('update', $lease);
+        $canViewTenant = $this->auth->user()->can('view', $lease->tenant);
+
+        return view('calendar.show', compact('lease', 'statusses', 'cantEdit', 'canViewTenant'));
     }
 
     /**

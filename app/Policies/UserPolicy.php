@@ -39,6 +39,18 @@ class UserPolicy
     }
 
     /**
+     * Determine whether the authenticated user view the account or tenant information.
+     *
+     * @param  User $authUser   The authenticated user entity.
+     * @param  User $userModel  The user entity from the given tenant/user
+     * @return bool
+     */
+    public function view(User $authUser, User $userModel): bool
+    {
+        return $authUser->hasRole('admin') || $authUser->is($userModel);
+    }
+
+    /**
      * Determine whether the authenticated user can create a new user of not.
      *
      * @param  User $authUser   The authenticated user entity
