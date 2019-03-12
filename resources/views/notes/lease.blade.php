@@ -16,8 +16,9 @@
         </div>
     </div>
 
-<div class="pb-3">
-    <div class="card border-0 shadow-sm">
+    
+
+           <div class="card text-center">
   <div class="card-header">
     <ul class="nav nav-tabs card-header-tabs">
       <li class="nav-item">
@@ -37,5 +38,5 @@
     <a href="#" class="btn btn-primary">Go somewhere</a>
   </div>
 </div>
-</div>
+
 @endsection

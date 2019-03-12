@@ -55,6 +55,10 @@ Route::post('calendar/create', 'Lease\CalendarController@store')->name('calendar
 Route::get('calendar/{lease}', 'Lease\CalendarController@show')->name('calendar.show');
 Route::match(['get', 'delete'], 'calendar/delete/{lease}', 'Lease\CalendarController@destroy')->name('calendar.delete');
 
+// Calender notes routes
+Route::get('calendar/notes/{lease}', 'Lease\NoteController@show')->name('calendar.notes');
+Route::get('calendar/notes/new/{lease}', 'Lease\NoteController@create')->name('calendar.notes.create');
+
 // Tenant billing information routes
 Route::patch('huurders/facturatie/{user}', 'Lease\Tenants\BillableController@store')->name('tenants.billing.store');
 Route::get('huurders/facturatie/{user}', 'Lease\Tenants\BillableController@index')->name('tenants.billing');

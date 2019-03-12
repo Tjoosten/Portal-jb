@@ -26,7 +26,7 @@ class CalendarController extends Controller
     public function __construct()
     {
         parent::__construct(); // Initialiseer de globale constructor
-        $this->middleware(['auth', 'role:admin|leiding', 'forbid-banned-user']);
+        $this->middleware(['auth', 'role:admin|leiding|webmaster', 'forbid-banned-user']);
     }
 
     /**
@@ -79,6 +79,12 @@ class CalendarController extends Controller
         return redirect()->route('calendar.index');
     }
 
+    /**
+     * Display a lease in the application. 
+     * 
+     * @param  Lease $lease De databnak entiteit van de verhuring in de applicatie.
+     * @return View
+     */
     public function show(Lease $lease): View
     {
         return view('calendar.show', compact('lease'));

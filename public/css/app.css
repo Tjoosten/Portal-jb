@@ -12660,6 +12660,45 @@ a.text-sgv-green-dark:focus {
   text-decoration: none;
 }
 
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link {
+  color: #572600;
+  background-color: #fff;
+  border-color: #fff #fff #fff;
+}
+
+.card-header {
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 0;
+  color: inherit;
+  background-color: #bdd732;
+  border-bottom: #fff;
+}
+
+.nav-tabs .nav-link.active:hover,
+.nav-tabs .nav-link.active:focus {
+  color: #572600;
+  background-color: #fff;
+  border-color: #fff #fff #fff;
+}
+
+.nav-tabs .nav-link:hover,
+.nav-tabs .nav-link:focus {
+  color: #572600;
+  background-color: whitesmoke;
+}
+
+.nav-tabs .nav-link:hover,
+.nav-tabs .nav-link:focus {
+  border-color: whitesmoke whitesmoke #fff;
+}
+
+.nav-item > a {
+  color: #572600;
+  text-decoration: none;
+  background-color: transparent;
+}
+
 .page-header {
   display: -ms-flexbox;
   display: -webkit-box;

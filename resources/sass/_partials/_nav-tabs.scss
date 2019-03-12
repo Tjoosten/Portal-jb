@@ -1,0 +1,38 @@
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link {
+  color: $sgv-brown;
+  background-color: $white;
+  border-color: $white $white $white;
+}
+
+.card-header {
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 0;
+  color: inherit;
+  background-color: $sgv-green;
+  border-bottom: $white;
+}
+
+.nav-tabs .nav-link.active:hover,
+.nav-tabs .nav-link.active:focus {
+  color: $sgv-brown;
+  background-color: $white;
+  border-color: $white $white $white;
+}
+
+.nav-tabs .nav-link:hover,
+.nav-tabs .nav-link:focus {
+  color: $sgv-brown;
+  background-color: darken($white, 4%);
+}
+
+.nav-tabs .nav-link:hover,
+.nav-tabs .nav-link:focus {
+  border-color: darken($white, 4%) darken($white, 4%)$white;
+}
+
+.nav-item > a {
+  color: $sgv-brown;
+  text-decoration: none;
+  background-color: transparent;
+}

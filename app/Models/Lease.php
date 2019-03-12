@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use App\Models\NoteLease;
 use App\Repositories\CalendarRepository;
 use App\Traits\ActivityLog;
 use App\User;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * Class Lease 
@@ -60,6 +62,16 @@ class Lease extends CalendarRepository
     public function getPeriodeAttribute(): string
     {
         return "{$this->start_datum->format('d/m/Y')} - {$this->eind_datum->format('d/m/Y')}";
+    }
+
+    /**
+     * HasMany relation for all the lease his notes. 
+     * 
+     * @return MorphMany
+     */
+    public function notes(): HasMany
+    {
+        return $this->hasMany(NoteLease::class);
     }
 
     /**
