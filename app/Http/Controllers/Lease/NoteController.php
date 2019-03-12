@@ -22,7 +22,7 @@ class NoteController extends Controller
     public function __construct() 
     {
         parent::__construct(); // Initialiseer de globale constructor voor de controllers.
-        $this->middleware(['auth', 'role:admin|leiding|webmaster', 'forbid-banned-user']);
+        $this->middleware(['auth', 'role:admin|webmaster', 'forbid-banned-user']);
     }
 
     /**
