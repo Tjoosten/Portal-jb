@@ -18,7 +18,7 @@ class NoteLease extends Model
      * 
      * @return array
      */
-    protected $fillable = ['title', 'beschrijving'];
+    protected $fillable = ['titel', 'beschrijving'];
 
     /**
      * Data relatie voor de verhurings data.

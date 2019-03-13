@@ -18,7 +18,7 @@
 
     <div class="pb-3">
         <div class="card border-0 shadow-sm">
-            <div class="card-header-lease">
+            <div class="card-header-lease card-header">
                 @include ('calendar.components.show-navigation', ['lease' => $lease])
             </div>
             <form method="POST" action="" class="card-body">

@@ -18,10 +18,12 @@
 
     <div class="pb-3">
         <div class="card border-0 shadow-sm">
-            <div class="card-header">
+            <div class="card-header-lease card-header">
                 @include ('calendar.components.show-navigation', ['lease' => $lease])
             </div>
             <div class="card-body">
+                @include('flash::message') {{-- Flash session view partial --}}
+
                 <div class="table-responsive">
                     <table class="table table-sm @if (count($notes) > 0) table-hover @endif mb-1">
                         <thead>
@@ -36,7 +38,7 @@
                             @forelse ($notes as $note) {{-- Loop trough the lease notes --}}
                                 <tr>
                                     <td>{{ $note->created_at->format('d/m/Y') }}</td>
-                                    <td>{{ $note->autheur->name }}</td>
+                                    <td>{{ $note->auteur->name }}</td>
                                     <td>{{ $note->titel }}</td>
                                 </tr>
                             @empty {{-- There are no notes found for the lease --}}
@@ -49,6 +51,8 @@
                         </tbody>
                     </table>
                 </div>
+
+                {{ $notes->links() }} {{-- Pagination view instance --}}
             </div>
         </div>
     </div>
