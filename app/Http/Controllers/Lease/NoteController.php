@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Lease;
 
+use Gate;
 use App\Http\Requests\Calendar\NoteValidator;
 use App\Models\NoteLease;
 use Illuminate\Http\RedirectResponse;
@@ -80,15 +81,20 @@ class NoteController extends Controller
      *
      * @throws \Illuminate\Auth\Access\AuthorizationException
      *
-     * @param  NoteValidator $input
-     * @param  NoteLease $note
+     * @param  NoteValidator $input De form rquest class die verantwoordelijk is voor de validatie.
+     * @param  NoteLease     $note  De databank entiteit van de notitie
      * @return RedirectResponse
      */
     public function update(NoteValidator $input, NoteLease $note): RedirectResponse
     {
-        $this->authorize('update', $input);
+        // Bevestig dat de gebruiker geauthoriseerd is om de notitie te verwijderen.
+        // En bevestig ook dat de entitieit is aangepast in de opslag.
+        if (Gate::allows('update', $note) && $note->update($input->all())) {
+            $this->flashMessage->success('De notitie is aangepast in het portaal.');
+            $this->auth->user()->logActivity('Heeft een notitie aangepast in de applicatie');
+        }
 
-        if ()
+        return redirect()->route('calendar.notes', $note->verhuring);
     }
 
     /**
@@ -106,18 +112,16 @@ class NoteController extends Controller
     /**
      * Methode voor het verwijderen van een notitie in de applicatie.
      *
-     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @throws \Exception <- Native PHP class
      *
      * @param  NoteLease $note De databank entiteit van de notitie.
      * @return RedirectResponse
      */
     public function destroy(NoteLease $note): RedirectResponse
     {
-        $this->authorize('delete', $note);
-
         // Bevestig dat de notitie is verwijder in de applictie.
         // Indien deze verwijderd is moet de ondernomen actie gelogd worden.
-        if ($note->delete()) {
+        if (Gate::allows('delete', $note) && $note->delete()) {
             $tenant = $note->verhuring->tenant->name;
             $this->auth->user()->logActivity("Heeft een notitie verwijderd voor de verhuring aan {$tenant}.");
         }

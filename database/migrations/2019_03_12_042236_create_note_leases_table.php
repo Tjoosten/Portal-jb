@@ -16,11 +16,14 @@ class CreateNoteLeasesTable extends Migration
         Schema::create('note_leases', function (Blueprint $table): void {
             $table->increments('id');
             $table->unsignedInteger('author_id')->nullable();
-            $table->foreign('author_id')->references('id')->on('users')->onDelete('set null');
             $table->unsignedInteger('lease_id');
             $table->string('titel');
             $table->text('beschrijving');
             $table->timestamps();
+
+            // Foreign keys
+            $table->foreign('author_id')->references('id')->on('users')->onDelete('set null');
+            $table->foreign('lease_id')->references('id')->on('leases')->onDelete('cascade');
         });
     }
 

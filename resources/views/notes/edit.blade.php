@@ -21,10 +21,10 @@
             <div class="card-header-lease card-header">
                 @include ('calendar.components.show-navigation', ['lease' => $lease])
             </div>
-            <form method="POST" action="{{ route('calendar.notes.store', $lease) }}" class="card-body">
-                @csrf {{-- form field protection --}}
-                @method('PATCH')
-                @form($note)
+            <form method="POST" action="{{ route('calendar.notes.update', $note) }}" class="card-body">
+                @csrf               {{-- form field protection --}}
+                @method('PATCH')    {{-- HTTP method spoofing --}}
+                @form($note)        {{-- Bind the data to the form --}}
 
                 <div class="form-row">
                     <div class="form-group col-7">
