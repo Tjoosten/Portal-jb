@@ -4,3 +4,9 @@
 .no-underline:hover {
     text-decoration: none;
 }
+
+a.disabled,
+a:disabled {
+    pointer-events: none;
+    opacity: 0.65;
+}

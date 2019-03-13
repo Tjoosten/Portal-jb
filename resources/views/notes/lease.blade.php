@@ -40,6 +40,22 @@
                                     <td>{{ $note->created_at->format('d/m/Y') }}</td>
                                     <td>{{ $note->auteur->name }}</td>
                                     <td>{{ $note->titel }}</td>
+
+                                    <td> {{-- Options --}}
+                                        <span class="float-right">
+                                            <a href="" class="text-decoration-none text-secondary mr-3">
+                                                <i class="fe fe-eye"></i>
+                                            </a>
+
+                                            <a href="" class="text-decoration-none @if (auth()->user()->cannot('update', $note)) disabled @endif text-secondary mr-1">
+                                                <i class="fe fe-edit"></i>
+                                            </a>
+
+                                            <a href="" class="text-decoration-none @if (auth()->user()->cannot('delete', $note)) disabled @endif text-danger">
+                                                <i class="fe fe-x-circle"></i>
+                                            </a>
+                                        </span>
+                                    </td>
                                 </tr>
                             @empty {{-- There are no notes found for the lease --}}
                                 <tr>
