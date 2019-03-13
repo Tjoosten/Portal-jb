@@ -20,7 +20,7 @@ class NotePolicy
      *
      * @param  User       $user         De databank entiteit van de geauthenticeerde gebruiker.
      * @param  NoteLease  $noteLease    De databank entiteit van de notitie.
-     * @return mixed
+     * @return bool
      */
     public function update(User $user, NoteLease $noteLease): bool
     {
@@ -32,7 +32,7 @@ class NotePolicy
      *
      * @param  User       $user         De databank entiteit van de geauthenticeerde gebruiker.
      * @param  NoteLease  $noteLease    De databank entiteit van de notitie.
-     * @return mixed
+     * @return bool
      */
     public function delete(User $user, NoteLease $noteLease): bool
     {

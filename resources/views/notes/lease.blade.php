@@ -47,11 +47,11 @@
                                                 <i class="fe fe-eye"></i>
                                             </a>
 
-                                            <a href="" class="text-decoration-none @if (auth()->user()->cannot('update', $note)) disabled @endif text-secondary mr-1">
+                                            <a href="{{ route('calendar.notes.edit', $note) }}" class="text-decoration-none @if (auth()->user()->cannot('update', $note)) disabled @endif text-secondary mr-1">
                                                 <i class="fe fe-edit"></i>
                                             </a>
 
-                                            <a href="" class="text-decoration-none @if (auth()->user()->cannot('delete', $note)) disabled @endif text-danger">
+                                            <a href="{{ route('calendar.notes.delete', $note)  }}" class="text-decoration-none @if (auth()->user()->cannot('delete', $note)) disabled @endif text-danger">
                                                 <i class="fe fe-x-circle"></i>
                                             </a>
                                         </span>

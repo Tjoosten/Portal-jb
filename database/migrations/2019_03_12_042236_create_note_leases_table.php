@@ -15,8 +15,9 @@ class CreateNoteLeasesTable extends Migration
     {
         Schema::create('note_leases', function (Blueprint $table): void {
             $table->increments('id');
-            $table->unsignedInteger('author_id')->nullable()->index();
-            $table->unsignedInteger('lease_id')->index();
+            $table->unsignedInteger('author_id')->nullable();
+            $table->foreign('author_id')->references('id')->on('users')->onDelete('set null');
+            $table->unsignedInteger('lease_id');
             $table->string('titel');
             $table->text('beschrijving');
             $table->timestamps();

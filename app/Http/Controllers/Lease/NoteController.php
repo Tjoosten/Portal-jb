@@ -60,13 +60,68 @@ class NoteController extends Controller
     }
 
     /**
-     * Weergave van de notities voor een specifieke verhuur. 
-     * 
+     * Weergave voor het wijzigen van een notitie in de applicatie.
+     *
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     *
+     * @param  NoteLease $note De databank entiteit van de notitie
+     * @return View
+     */
+    public function edit(NoteLease $note): View
+    {
+        $this->authorize('update', $note);
+        $lease = $note->verhuring;
+
+        return view('notes.edit', compact('note', 'lease'));
+    }
+
+    /**
+     * Methode voor het aanpassen van een notitie in de applicatie.
+     *
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     *
+     * @param  NoteValidator $input
+     * @param  NoteLease $note
+     * @return RedirectResponse
+     */
+    public function update(NoteValidator $input, NoteLease $note): RedirectResponse
+    {
+        $this->authorize('update', $input);
+
+        if ()
+    }
+
+    /**
+     * Weergave van de notities voor een specifieke verhuur.
+     *
+     * @param  Lease $lease De databank entiteit van de verhuring.
      * @return View 
      */
     public function show(Lease $lease): View 
     {
         $notes = $lease->notes()->simplePaginate();
         return view('notes.lease', compact('notes', 'lease'));
+    }
+
+    /**
+     * Methode voor het verwijderen van een notitie in de applicatie.
+     *
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     *
+     * @param  NoteLease $note De databank entiteit van de notitie.
+     * @return RedirectResponse
+     */
+    public function destroy(NoteLease $note): RedirectResponse
+    {
+        $this->authorize('delete', $note);
+
+        // Bevestig dat de notitie is verwijder in de applictie.
+        // Indien deze verwijderd is moet de ondernomen actie gelogd worden.
+        if ($note->delete()) {
+            $tenant = $note->verhuring->tenant->name;
+            $this->auth->user()->logActivity("Heeft een notitie verwijderd voor de verhuring aan {$tenant}.");
+        }
+
+        return redirect()->route('calendar.notes', $note->verhuring);
     }
 }

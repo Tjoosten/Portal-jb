@@ -27,7 +27,7 @@ class NoteLease extends Model
      */
     public function verhuring(): BelongsTo
     {
-        return $this->belongsTo('lease_id');
+        return $this->belongsTo(Lease::class, 'lease_id');
     }
 
     /**
