@@ -57,6 +57,7 @@ Route::match(['get', 'delete'], 'calendar/delete/{lease}', 'Lease\CalendarContro
 
 // Calender notes routes
 Route::get('calendar/notes/{lease}', 'Lease\NoteController@show')->name('calendar.notes');
+Route::get('calendar/notes/show/{note}', 'Lease\NoteController@showNote')->name('calendar.notes.show');
 Route::get('calendar/notes/new/{lease}', 'Lease\NoteController@create')->name('calendar.notes.create');
 Route::get('calendar/notes/delete/{note}', 'Lease\NoteController@destroy')->name('calendar.notes.delete');
 Route::get('calendar/notes/edit/{note}', 'Lease\NoteController@edit')->name('calendar.notes.edit');

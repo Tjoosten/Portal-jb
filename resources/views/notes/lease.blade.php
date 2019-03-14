@@ -43,7 +43,7 @@
 
                                     <td> {{-- Options --}}
                                         <span class="float-right">
-                                            <a href="" class="text-decoration-none text-secondary mr-3">
+                                            <a href="{{ route('calendar.notes.show', $note)  }}" class="text-decoration-none text-secondary mr-3">
                                                 <i class="fe fe-eye"></i>
                                             </a>
 

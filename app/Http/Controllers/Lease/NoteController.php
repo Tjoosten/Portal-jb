@@ -98,6 +98,17 @@ class NoteController extends Controller
     }
 
     /**
+     * Methode voor het weergeven van een notitie in de applicatie.
+     *
+     * @param  NoteLease $note De databank entiteit van de notitie.
+     * @return View
+     */
+    public function showNote(NoteLease $note): View
+    {
+        return view('notes.show', compact('note'));
+    }
+
+    /**
      * Weergave van de notities voor een specifieke verhuur.
      *
      * @param  Lease $lease De databank entiteit van de verhuring.

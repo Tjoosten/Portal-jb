@@ -14,7 +14,7 @@
 </div>
 
 <div class="col-3">
-    <div class="card shadow-sm mb-4 p-2">
+    <div class="card shadow-sm border-0 mb-4 p-2">
         <div class="d-flex align-items-center">
             <span class="stamp stamp-md shadow-sm bg-green-stamp mr-3">
                 <i class="fe text-sgv-brown fe-alert-triangle"></i>
