@@ -30,18 +30,22 @@
 
                 <hr class="mt-0">
 
-                <a href="" class="text-decoration-none card-link text-secondary">
-                    <i class="fe fe-chevrons-left mr-1"></i> Overzicht
+                <a href="{{ route('calendar.notes', $note->verhuring) }}" class="text-decoration-none card-link text-secondary">
+                    <i class="fe fe-chevrons-left mr-1"></i> Notitie overzicht
                 </a>
 
                 <span class="float-right">
-                    <a href="" class="text-decoration-none card-link text-secondary">
-                        <i class="fe fe-edit mr-1"></i> Wijzig notitie
-                    </a>
+                    @if (auth()->user()->can('update', $note))
+                        <a href="{{ route('calendar.notes.edit', $note)  }}" class="text-decoration-none card-link text-secondary">
+                            <i class="fe fe-edit mr-1"></i> Wijzig notitie
+                        </a>
+                    @endif
 
-                    <a href="" class="text-decoration-none card-link text-danger">
-                        <i class="fe fe-x-circle mr-1"></i> Verwijder notitie
-                    </a>
+                    @if (auth()->user()->can('delete', $note))
+                         <a href="{{ route('calendar.notes.delete', $note) }}" class="text-decoration-none card-link text-danger">
+                             <i class="fe fe-x-circle mr-1"></i> Verwijder notitie
+                         </a>
+                    @endif
                 </span>
             </div>
         </div>
