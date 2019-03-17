@@ -18,6 +18,9 @@ Auth::routes(['register' => false]);
 Route::get('/', 'HomeController@indexFrontend')->name('/');
 Route::get('/home', 'HomeController@indexBackend')->name('home');
 
+// Disclaimer routes 
+Route::view('/gebruikersvoorwaarden', 'disclaimers.terms-of-service')->name('disclaimer.terms');
+
 // Werkpunten routes
 Route::get('/werkpunten/index', 'Lokalen\WerkpuntenController@index')->name('werkpunten.index');
 Route::get('{lokaal}/werkpunten/{status}', 'Lokalen\WerkpuntenController@lokaal')->name('werkpunten.lokaal');

@@ -101,9 +101,14 @@
                 </nav>
             </div>
 
-            <main role="main" class="container-fluid">
+            @if (active('disclaimer.*'))
+                <main role="main">
+                <div class="py-0">
+            @else
+                <main role="main" class="container-fluid">
                 <div class="py-3">
-                    @yield('content')
+            @endif
+                @yield('content')
                 </div>
             </main>
 
@@ -113,7 +118,7 @@
 
                     <div class="float-right">
                         @if (Auth::user()->hasRole('huurder'))
-                            <a href="" class="link-footer mr-2">
+                            <a href="{{ route('disclaimer.terms') }}" class="link-footer mr-2">
                                 Gebruikersvoorwaarden
                             </a>
                         @endif
