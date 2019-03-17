@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Lease;
 
 use App\Http\Requests\Tenants\BillableValidator;
 use App\Models\Lease;
+use App\Models\LeaseBillingInfo;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -45,23 +46,18 @@ class BillingController extends Controller
      * 
      * @todo Implementatie routering (backend & view)
      * 
-     * @param  BillableValidator $input
-     * @param  Lease             $lease
+     * @param  BillableValidator $input The form request instantie die de validatie afhandeld.
+     * @param  Lease             $lease De databank entiteit van de gegeven verhuring.
      * @return RedirectResponse
      */
     public function update(BillableValidator $input, Lease $lease): RedirectResponse
     {
         // Confirmatie dat de facturatie data van de huurder is aangepast.
-        if ($lease->tenant->update($input->except('extra_informatie'))) {
-            $leaseBillingInfo = BillableInfoLease::update(['extra_informatie' => $input->extra_informatie]);
-            
-            // 1) 
-            // 2) 
-            if (! $lease->hasExtraBillingInfo() && $leaseBillingInfo) {
-                $lease->billingInformation()->assocaiate($leaseBillingInfo)->save();        
-            }
+        if ($lease->tenant->billingInformation->update($input->all())) {
+            $lease->update($input->only('extra_informatie'));
+            $this->auth->user()->logActivity("Heeft de facturatie data van {$lease->tenant->name} gewijzigd via de verhuur beheer");
         }
 
-        return redirect()->route('lease.billing ', $lease);
+        return redirect()->route('lease.billing', $lease);
     }
 }

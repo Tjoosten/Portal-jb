@@ -124,7 +124,7 @@
                         @endif
 
                         <a href="" class="link-footer">
-                            <i class="fe fe-mr-2 fe-github"></i> Github
+                            <i class="fe fe-chevrons-up"></i> Naar boven
                         </a>
                     </div>
                 </div>

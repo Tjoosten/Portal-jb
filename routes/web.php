@@ -69,6 +69,7 @@ Route::post('calendar/notes/new/{lease}', 'Lease\NoteController@store')->name('c
 
 // Tenant billing information routes
 Route::get('lease/billing/{lease}', 'Lease\BillingController@index')->name('lease.billing');
+Route::patch('lease/billing/{lease}', 'Lease\BillingController@update')->name('lease.billing.update');
 Route::patch('huurders/facturatie/{user}', 'Lease\Tenants\BillableController@store')->name('tenants.billing.store');
 Route::get('huurders/facturatie/{user}', 'Lease\Tenants\BillableController@index')->name('tenants.billing');
 

@@ -32,7 +32,8 @@ class BillableValidator extends FormRequest
             'voornaam'      => ['required', 'string', 'max:191'],
             'achternaam'    => ['required', 'string', 'max:191'],
             'email'         => ['required', 'string', 'max:191'],
-            'postcode'      => ['required', 'integer', 'max:30'],
+            'groepsnaam'    => ['required', 'string'],
+            'postcode'      => ['required', 'integer'],
             'stad'          => ['required', 'string', 'max:191'],
             'land'          => ['required', 'string', 'max:191'],
             'adres'         => ['required', 'string', 'max:191']

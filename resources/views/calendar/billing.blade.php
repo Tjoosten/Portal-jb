@@ -7,6 +7,12 @@
         <div class="page-subtitle">
             Facturatie data
         </div>
+
+        <div class="page-options d-flex">
+            <a href="{{ route('calendar.show', $lease) }}" class="btn btn-sgv-green">
+                <i class="fe fe-calendar mr-1"></i> Overzicht
+            </a>
+        </div>
     </div>
     </div>
 
@@ -16,8 +22,9 @@
                 @include('calendar.components.show-navigation', ['lease' => $lease])
             </div>
 
-            <form action="" method="POST" class="card-body">
+            <form action="{{ route('lease.billing.update', $lease) }}" method="POST" class="card-body">
                 @csrf {{-- Form field protection --}}
+                @method('PATCH') {{-- HTTP method spoofing --}}
                 @form($lease->tenant->billingInformation) {{-- Bind data to the form --}}
 
                 <div class="alert alert-danger border-0" role="alert">
@@ -85,7 +92,7 @@
                 <div class="form-row">
                     <div class="form-group col-12">
                         <label for="inputExtraInfo">Extra informatie specifiek voor de verhuur</label>
-                        <textarea class="form-control @error('extra_informatie', 'is-invalid')" rows="3">{{ $lease->billing->extra_informatie ?? old('extra_informatie') }}</textarea>
+                        <textarea class="form-control @error('extra_informatie', 'is-invalid')" @input('extra_informatie') rows="3">{{ $lease->billing->extra_informatie ?? old('extra_informatie') }}</textarea>
                         @error('extra_informatie')
                     </div>
                 </div>
