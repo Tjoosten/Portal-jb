@@ -74,7 +74,7 @@
                                 Algemene voorwaarden
                             </a>
 
-                            <a href="" class="list-group-item-action list-group-item">
+                            <a href="{{ route('disclaimer.privacy') }}" class="{{ active('disclaimer.privacy') }} list-group-item-action list-group-item">
                                 Privacy beleid
                             </a>
                         </div>

@@ -20,6 +20,7 @@ Route::get('/home', 'HomeController@indexBackend')->name('home');
 
 // Disclaimer routes 
 Route::view('/gebruikersvoorwaarden', 'disclaimers.terms-of-service')->name('disclaimer.terms');
+Route::view('/privacy-policy', 'disclaimers.privacy-policy')->name('disclaimer.privacy');
 
 // Werkpunten routes
 Route::get('/werkpunten/index', 'Lokalen\WerkpuntenController@index')->name('werkpunten.index');
