@@ -27,12 +27,20 @@
 
                     <td> {{-- Option columns --}}
                         <span class="float-right">
-                            <a href="{{ route('calendar.show', $lease) }}" class="text-decoration-none text-secondary">
-                                <i class="fe fe-eye mr-1"></i>
+                            <a href="{{ route('calendar.show', $lease) }}" class="text-decoration-none text-secondary  mr-2">
+                                <i class="fe fe-eye"></i>
+                            </a>
+
+                            <a href="" class="text-decoration-none text-success mr-1">
+                                <i class="fe fe-check"></i>
+                            </a>
+
+                            <a href="" class="text-decoration-none text-danger mr-2">
+                                <i class="fe fe-x-circle"></i>
                             </a>
 
                             <a href="{{ route('calendar.delete', $lease) }}" class="text-decoration-none text-danger">
-                                <i class="fe fe-x-circle mr-1"></i>
+                                <i class="fe fe-trash-2 mr-1"></i>
                             </a>
                         </span>
                     </td> {{-- /// Option column --}}
