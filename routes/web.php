@@ -50,6 +50,10 @@ Route::match(['get', 'delete'], '/users/unlock/{user}', 'Users\LockController@de
 
 // Calendar Routes
 Route::get('calendar', 'Lease\CalendarController@index')->name('calendar.index');
+Route::get('calendar/create', 'Lease\CalendarController@create')->name('calendar.create');
+Route::post('calendar/create', 'Lease\CalendarController@store')->name('calendar.store');
+Route::get('calendar/{lease}', 'Lease\CalendarController@show')->name('calendar.show');
+Route::match(['get', 'delete'], 'calendar/delete/{lease}', 'Lease\CalendarController@destroy')->name('calendar.delete');
 
 // Tenant billing information routes
 Route::patch('huurders/facturatie/{user}', 'Lease\Tenants\BillableController@store')->name('tenants.billing.store');
@@ -73,6 +77,7 @@ Route::get('admins/delete/{admin}/undo', 'Users\AdminController@undoDeleteRoute'
 Route::get('admins/nieuw', 'Users\AdminController@create')->name('admins.create');
 Route::post('admins/nieuw', 'Users\AdminController@store')->name('admins.store');
 Route::get('admins/profile/{user}', 'Users\AdminController@show')->name('admins.show');
+Route::patch('admins/profile/{user}', 'Users\AdminController@update')->name('admins.update');
 
 // Account settings routes
 Route::get('/account-settings/{type?}', 'Users\SettingsController@index')->name('account.settings');
